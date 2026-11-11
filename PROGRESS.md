@@ -40,3 +40,10 @@ Session log for the Portfolio site. **Append only** — never rewrite earlier en
 - Files ready locally: `AGENTS.md`, `PROGRESS.md`, `README.md` (`27ef7eb`).
 - Next: owner grants Cursor app access to `Portfolio`; agent re-pushes.
 - Need from owner: add repo in GitHub → Settings → Applications → Cursor → repository access.
+
+### Surfer intro design brief filed — 2026-11-11 (Europe/London)
+
+- Added `docs/SURFER_INTRO_SPEC.md` plus `docs/reference-frames.png` (and related design refs).
+- Files touched: `docs/SURFER_INTRO_SPEC.md`, `docs/reference-frames.png`, `docs/surfer-intro-how-to.png`, `docs/bookshelf-confessions-reference.png`, `PROGRESS.md`.
+- Next: push when Cursor has write access; still awaiting confirm on `AGENTS.md` / `PROGRESS.md` before S0; do **not** start Surfer Phase 0 until explicitly asked.
+- Need from owner: Cursor app access to `Portfolio` for push; then green-light order (docs confirm → S0 vs Surfer Phase 0).
