@@ -89,5 +89,7 @@ Session log for the Portfolio site. **Append only** — never rewrite earlier en
 - Owner chose `docs/design-guide.md` over the measured visual spec.
 - Migrated tokens (beige #F3E7C4, Tiffany links, sunset accent), Georgia system stack, 160px sticky tab rail, 576px content / 720px bookshelf, bookshelf spine palette, nav “— ” current state + 4px hover slide.
 - Files: `styles/tokens.css`, `app/{layout,globals,about,projects,thoughts,earth,clips}/**`, `components/{shell,ui,article,bookshelf}/**`, `data/books.ts`, `types/content.ts`, `docs/decisions.md`.
-- Next: avatar asset; real book notes; push when Cursor has write access to GitHub `Portfolio`; Surfer intro only when asked.
+- Local verify: `next build` clean; `/about` `/books` `/projects` `/thoughts` 200 on :3000; bookshelf dialog + nav current marker OK.
+- Branch: `cursor/design-guide-migration-7c77` (`91d5c89`) — `git push` still 403 for `cursor[bot]`.
+- Next: avatar asset; real book notes; grant Cursor write access then push/PR; Surfer intro only when asked.
 - Need from owner: avatar; Cursor app write access to `Coconut101-beep/Portfolio`.
