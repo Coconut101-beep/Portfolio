@@ -2,7 +2,7 @@ import { books, bookshelfPage } from "@/data/books";
 import { clips } from "@/data/clips";
 import { photos } from "@/data/photos";
 import { posts } from "@/data/posts";
-import { navItems, profile } from "@/data/profile";
+import { following, navItems, profile } from "@/data/profile";
 import { projects } from "@/data/projects";
 
 /** The only place pages get data from. */
@@ -12,6 +12,10 @@ export function getProfile() {
 
 export function getNavItems() {
   return navItems;
+}
+
+export function getFollowing() {
+  return following;
 }
 
 export function getProjects() {

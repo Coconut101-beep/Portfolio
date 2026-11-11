@@ -8,18 +8,20 @@ type Props = {
   external?: boolean;
   onClick?: () => void;
   "data-active"?: string;
+  plain?: boolean;
 };
 
-export function Link({ href, children, className, external, onClick, ...rest }: Props) {
+export function Link({ href, children, className, external, onClick, plain, ...rest }: Props) {
+  const combined = [className, plain ? undefined : undefined].filter(Boolean).join(" ") || undefined;
   if (external) {
     return (
-      <a href={href} className={className} target="_blank" rel="noreferrer" onClick={onClick} {...rest}>
+      <a href={href} className={combined} target="_blank" rel="noreferrer" onClick={onClick} {...rest}>
         {children}
       </a>
     );
   }
   return (
-    <NextLink href={href} className={className} onClick={onClick} {...rest}>
+    <NextLink href={href} className={combined} onClick={onClick} {...rest}>
       {children}
     </NextLink>
   );

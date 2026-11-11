@@ -69,3 +69,10 @@ Session log for the Portfolio site. **Append only** — never rewrite earlier en
 - Files: `components/bookshelf/*`, `data/books.ts`, `app/books/page.tsx`, `styles/tokens.css`, `types/content.ts`, `lib/content.ts`, `public/bookshelf/*`.
 - Next: replace LOREM book titles/notes with real ones; push when GitHub access granted.
 - Need from owner: real book list / notes; Cursor write access to `Portfolio`.
+
+### Visual spec applied — 2026-11-11 (Europe/London)
+
+- Matched measured editorial spec: core palette, Source Serif 4 only, nav/text geometry, identity row, colour bank + spine remap.
+- Files: `styles/tokens.css`, `app/**`, `components/{shell,ui,article,bookshelf}/**`, `data/{books,profile}.ts`, `types/content.ts`, `lib/content.ts`, `docs/decisions.md`.
+- Next: avatar image; push when GitHub access granted; real book notes.
+- Need from owner: avatar asset; Cursor write access to `Portfolio`.

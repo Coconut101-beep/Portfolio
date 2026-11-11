@@ -1,16 +1,10 @@
-type Props = {
-  className?: string;
-};
-
-export function Hairline({ className }: Props) {
+/** Visual spec: no divider lines. Kept as a spacing-only spacer. */
+export function Hairline({ className }: { className?: string }) {
   return (
-    <hr
+    <div
       className={className}
-      style={{
-        border: 0,
-        borderTop: "1px solid var(--color-line)",
-        margin: "var(--space-5) 0",
-      }}
+      aria-hidden="true"
+      style={{ height: "var(--space-section)", margin: 0, border: 0, background: "transparent" }}
     />
   );
 }

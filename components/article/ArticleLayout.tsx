@@ -1,6 +1,4 @@
 import type { ReactNode } from "react";
-import { Hairline } from "@/components/ui/Hairline";
-import { Label } from "@/components/ui/Label";
 import { Link } from "@/components/ui/Link";
 
 type Props = {
@@ -21,17 +19,12 @@ export function ArticleLayout({
   backLabel = "All projects",
 }: Props) {
   return (
-    <article style={{ maxWidth: "var(--content-max)" }}>
-      {eyebrow ? <Label>{eyebrow}</Label> : null}
-      <h1 style={{ margin: "var(--space-3) 0 0", fontSize: "var(--text-4xl)" }}>{title}</h1>
-      {summary ? (
-        <p style={{ marginTop: "var(--space-4)", fontSize: "var(--text-lg)", color: "var(--color-ink-muted)" }}>
-          {summary}
-        </p>
-      ) : null}
-      <Hairline />
-      <div style={{ display: "grid", gap: "var(--space-5)" }}>{children}</div>
-      <p style={{ marginTop: "var(--space-7)", color: "var(--color-accent)" }}>
+    <article>
+      {eyebrow ? <p style={{ fontStyle: "italic", marginBottom: "var(--space-prose)" }}>{eyebrow}</p> : null}
+      <h1 style={{ margin: "0 0 var(--space-prose)" }}>{title}</h1>
+      {summary ? <p>{summary}</p> : null}
+      <div style={{ display: "grid", gap: 0 }}>{children}</div>
+      <p style={{ marginTop: "var(--space-section)" }}>
         <Link href={backHref}>← {backLabel}</Link>
       </p>
     </article>

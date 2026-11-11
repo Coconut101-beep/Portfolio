@@ -1,20 +1,16 @@
 import type { ReactNode } from "react";
 
-type Props = {
-  children: ReactNode;
-  className?: string;
-};
-
-export function Label({ children, className }: Props) {
+/** Sub-label: body size, italic, weight 400. */
+export function Label({ children, className }: { children: ReactNode; className?: string }) {
   return (
     <span
       className={className}
       style={{
-        display: "inline-block",
-        fontSize: "var(--text-xs)",
-        letterSpacing: "var(--tracking-wide)",
-        textTransform: "uppercase",
-        color: "var(--color-ink-muted)",
+        display: "inline",
+        fontSize: "var(--text-body)",
+        fontWeight: "var(--weight-regular)",
+        fontStyle: "italic",
+        color: "var(--color-ink)",
       }}
     >
       {children}

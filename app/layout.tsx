@@ -1,24 +1,22 @@
 import type { Metadata } from "next";
-import { Fraunces, Plus_Jakarta_Sans } from "next/font/google";
+import { Source_Serif_4 } from "next/font/google";
 import { AppShell } from "@/components/shell/AppShell";
 import { getProfile } from "@/lib/content";
 import "./globals.css";
 
-const display = Fraunces({
+const serif = Source_Serif_4({
   subsets: ["latin"],
-  variable: "--font-display-loaded",
-});
-
-const sans = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  variable: "--font-sans-loaded",
+  weight: ["400", "500"],
+  style: ["normal", "italic"],
+  variable: "--font-serif-loaded",
+  display: "swap",
 });
 
 const profile = getProfile();
 
 export const metadata: Metadata = {
   title: {
-    default: `${profile.nickname} — ${profile.name}`,
+    default: `${profile.name}`,
     template: `%s — ${profile.name}`,
   },
   description: profile.shortBio,
@@ -27,8 +25,8 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={`${display.variable} ${sans.variable}`}>
-        <style>{`:root{--font-display:var(--font-display-loaded), "Times New Roman", serif;--font-sans:var(--font-sans-loaded), system-ui, sans-serif;}`}</style>
+      <body className={serif.variable}>
+        <style>{`:root{--font-serif:var(--font-serif-loaded), "Iowan Old Style", "Palatino Linotype", Palatino, serif;}`}</style>
         <AppShell>{children}</AppShell>
       </body>
     </html>

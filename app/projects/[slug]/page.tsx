@@ -27,31 +27,28 @@ export default async function ProjectPage({ params }: Props) {
       backHref="/projects"
       backLabel="All projects"
     >
-      <section>
-        <h2 style={{ fontSize: "var(--text-xl)", margin: 0 }}>The problem</h2>
-        <p style={{ marginTop: "var(--space-2)" }}>{project.problem}</p>
-      </section>
-      <section>
-        <h2 style={{ fontSize: "var(--text-xl)", margin: 0 }}>What I did</h2>
-        <ul>
-          {project.approach.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
-      </section>
-      <section>
-        <h2 style={{ fontSize: "var(--text-xl)", margin: 0 }}>Results</h2>
-        <ul>
-          {project.outcome.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
-      </section>
+      <h2 style={{ margin: "var(--space-section) 0 var(--space-prose)" }}>The problem</h2>
+      <p>{project.problem}</p>
+
+      <h2 style={{ margin: "var(--space-section) 0 var(--space-prose)" }}>What I did</h2>
+      <ul className="prose-list">
+        {project.approach.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+
+      <h2 style={{ margin: "var(--space-section) 0 var(--space-prose)" }}>Results</h2>
+      <ul className="prose-list">
+        {project.outcome.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+
       {project.technical ? (
-        <section>
-          <h2 style={{ fontSize: "var(--text-xl)", margin: 0 }}>How it works technically</h2>
-          <p style={{ marginTop: "var(--space-2)" }}>{project.technical}</p>
-        </section>
+        <>
+          <h2 style={{ margin: "var(--space-section) 0 var(--space-prose)" }}>How it works technically</h2>
+          <p>{project.technical}</p>
+        </>
       ) : null}
     </ArticleLayout>
   );

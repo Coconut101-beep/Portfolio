@@ -1,4 +1,3 @@
-import { Label } from "@/components/ui/Label";
 import { getClips } from "@/lib/content";
 
 export const metadata = { title: "Clips of life" };
@@ -7,15 +6,12 @@ export default function ClipsPage() {
   const clips = getClips();
   return (
     <div>
-      <Label>Clips of life</Label>
-      <h1 style={{ margin: "var(--space-3) 0 var(--space-4)", fontSize: "var(--text-4xl)" }}>Clips of life</h1>
-      <p style={{ color: "var(--color-ink-muted)" }}>
-        Reuses the gallery in S6. For now, plain text slots from data:
-      </p>
-      <ul>
+      <h1 style={{ margin: "0 0 var(--space-prose)" }}>Clips of life</h1>
+      <p>The shared gallery arrives later. For now, clips are listed as text.</p>
+      <ul className="prose-list">
         {clips.map((c) => (
           <li key={c.id}>
-            {c.group}: {c.alt}
+            <em>{c.group}</em> — {c.alt}.
           </li>
         ))}
       </ul>

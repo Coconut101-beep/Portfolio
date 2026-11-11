@@ -13,6 +13,43 @@ export type Profile = {
   linkedin: string;
   shortBio: string;
   shopBio?: string;
+  avatarSrc?: string;
+};
+
+/** Spine colours — named bank keys only, stored per book in data/books.ts */
+export type SpineColor =
+  | "foam"
+  | "shell"
+  | "parchment"
+  | "sand"
+  | "apricot"
+  | "blush-clay"
+  | "terracotta"
+  | "sea-glass"
+  | "sage"
+  | "eucalyptus"
+  | "deep-teal"
+  | "slate-blue"
+  | "oxblood"
+  | "stone";
+
+export type Book = {
+  id: string;
+  title: string;
+  authors: string;
+  spineLabel: string;
+  spineColor: SpineColor;
+  note: string[];
+  quote?: string;
+  stature?: "short" | "regular" | "tall";
+};
+
+export type BookshelfPageCopy = {
+  eyebrow: string;
+  title: string;
+  subtitle: string;
+  shelfLead: string;
+  roomForOneMoreLabel: string;
 };
 
 export type Project = {
@@ -26,26 +63,6 @@ export type Project = {
   approach: string[];
   outcome: string[];
   technical?: string;
-};
-
-export type Book = {
-  id: string;
-  title: string;
-  authors: string;
-  spineLabel: string;
-  spineColor: "ocean" | "rose" | "gold" | "mint" | "rust" | "sky";
-  note: string[];
-  quote?: string;
-  /** Optional height hint for organic shelf rhythm. */
-  stature?: "short" | "regular" | "tall";
-};
-
-export type BookshelfPageCopy = {
-  eyebrow: string;
-  titleLines: [string, string, string];
-  subtitle: string;
-  shelfLead: string;
-  roomForOneMoreLabel: string;
 };
 
 export type Post = {

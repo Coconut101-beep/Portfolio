@@ -1,76 +1,125 @@
 /* The only CSS file with raw values. */
 
 :root {
-  /* Colour */
-  --color-bg: #f3e7c4;
-  --color-bg-elevated: #f7efd6;
-  --color-ink: #2b2a28;
-  --color-ink-muted: #5c5954;
-  --color-accent: #0a8a85;
-  --color-accent-soft: #d9ebea;
-  --color-line: #c9b992;
-  --color-shelf: #8b6b4a;
-  --color-shelf-shadow: rgba(43, 42, 40, 0.18);
-  --color-foam: #f7efd6;
-  --color-ocean: #397d87;
-  --color-rose: #d79989;
-  --color-gold: #e5c879;
-  --color-mint: #9fbea5;
-  --color-rust: #ac5550;
-  --color-sky: #8eafb7;
-  --color-bookshelf-sky: #9ec9e0;
-  --color-bookshelf-ink: #141414;
-  --color-focus: #0a8a85;
+  /* ——— Palette: core (3 colours) ——— */
+  --color-bg: #f0e4c3; /* page — warmer than foam, intentional */
+  --color-ink: #282624; /* text — never #000 */
+  --color-accent: #34827e; /* links only */
+  --color-nav-current: #7d7768; /* current-page marker in nav only */
 
-  /* Type */
-  --font-display: "Fraunces", "Times New Roman", serif;
-  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
-  --text-lg: 1.125rem;
-  --text-xl: 1.375rem;
-  --text-2xl: 1.75rem;
-  --text-3xl: 2.25rem;
-  --text-4xl: 3rem;
-  --leading-tight: 1.15;
-  --leading-body: 1.65;
-  --tracking-wide: 0.08em;
+  /* ——— Colour bank (supporting; never body text; ≤2 on one screen) ——— */
+  /* Creams and paper */
+  --color-foam: #f0eadf;
+  --color-shell: #eee5d7;
+  --color-parchment: #e7e1ce;
+  --color-sand: #e1c89c;
 
-  /* Space */
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-5: 1.5rem;
-  --space-6: 2rem;
-  --space-7: 3rem;
-  --space-8: 4rem;
-  --rail-width: 14rem;
-  --content-max: 42rem;
-  --page-max: 72rem;
+  /* Warm mids */
+  --color-apricot: #dfb795;
+  --color-blush-clay: #daa78e;
+  --color-terracotta: #be7a69;
 
-  /* Radius */
-  --radius-sm: 0.25rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
+  /* Greens and teals */
+  --color-sea-glass: #9ebeb3;
+  --color-sage: #b8c6b4;
+  --color-eucalyptus: #78a595;
+  --color-deep-teal: #568c89;
+
+  /* Deeps */
+  --color-slate-blue: #4a6971;
+  --color-oxblood: #944847;
+  --color-stone: #a4a297;
+
+  /* Fixed series order (charts / multi-colour UI) */
+  --series-1: #568c89;
+  --series-2: #be7a69;
+  --series-3: #78a595;
+  --series-4: #e1c89c;
+  --series-5: #4a6971;
+  --series-6: #944847;
+
+  /* Aliases used by layout primitives */
+  --color-ink-muted: var(--color-stone);
+  --color-focus: var(--color-accent);
+  --color-line: transparent; /* no borders in the visual spec */
+  --color-bg-elevated: var(--color-bg);
+  --color-shelf: var(--color-sand);
+  --color-shelf-shadow: transparent; /* no shadows */
+
+  /* ——— Type ——— */
+  --font-serif: "Source Serif 4", "Iowan Old Style", "Palatino Linotype", Palatino, serif;
+  --font-display: var(--font-serif);
+  --font-sans: var(--font-serif); /* no sans anywhere */
+
+  --text-body: 17.5px;
+  --text-h1: 28px;
+  --text-h2: 19px;
+  --leading-body: 26px; /* ~1.485 */
+  --leading-tight: 1.25;
+  --weight-regular: 400;
+  --weight-medium: 500;
+
+  /* legacy size steps mapped to the serif scale */
+  --text-xs: 14px;
+  --text-sm: 15px;
+  --text-base: var(--text-body);
+  --text-lg: var(--text-body);
+  --text-xl: var(--text-h2);
+  --text-2xl: var(--text-h1);
+  --text-3xl: var(--text-h1);
+  --text-4xl: var(--text-h1);
+  --tracking-wide: 0;
+
+  /* ——— Measure (from reference) ——— */
+  --page-pad-top: 90px;
+  --page-pad-bottom: 120px;
+  --nav-left: 455px;
+  --nav-width: 100px;
+  --text-left: 676px;
+  --text-width: 570px;
+  --identity-right: calc(100vw - (var(--text-left) + var(--text-width)));
+  --space-prose: 26px;
+  --space-section: 56px;
+  --space-list: 12px;
+  --link-underline-offset: 3px;
+  --link-underline-width: 1px;
+  --link-underline-hover: 2px;
+  --avatar-size: 40px;
+
+  /* Spacing scale (derived, still raw only here) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 26px;
+  --space-6: 40px;
+  --space-7: 56px;
+  --space-8: 90px;
+  --rail-width: var(--nav-width);
+  --content-max: var(--text-width);
+  --page-max: calc(var(--text-left) + var(--text-width));
+
+  /* Radius — unused in UI (no cards); kept for rare assets */
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
 
   /* Motion */
   --motion-fast: 120ms;
-  --motion-base: 220ms;
-  --motion-slow: 420ms;
-  --motion-shelf: 280ms;
+  --motion-base: 180ms;
+  --motion-slow: 320ms;
+  --motion-shelf: 220ms;
+  --motion-shelf-lift: 220ms;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out: cubic-bezier(0.45, 0, 0.55, 1);
 
-  /* Shelf */
-  --shelf-depth: 0.75rem;
-  --book-width: 2.85rem;
-  --book-height: 10.5rem;
-  --book-width-dense: 2.35rem;
-  --book-height-short: 9rem;
-  --book-height-tall: 11.5rem;
-  --books-per-shelf: 10;
-  --shelf-gap: 1.25rem;
-  --motion-shelf-lift: 320ms;
+  /* Shelf / spines */
+  --shelf-depth: 0;
+  --book-width: 2.6rem;
+  --book-height: 10rem;
+  --book-width-dense: 2.2rem;
+  --book-height-short: 8.5rem;
+  --book-height-tall: 11rem;
+  --books-per-shelf: 7;
+  --shelf-gap: 40px;
 }

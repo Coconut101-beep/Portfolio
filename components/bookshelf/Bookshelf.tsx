@@ -13,9 +13,7 @@ const PER_SHELF = 7;
 
 function chunkBooks(books: Book[], size: number) {
   const rows: Book[][] = [];
-  for (let i = 0; i < books.length; i += size) {
-    rows.push(books.slice(i, i + size));
-  }
+  for (let i = 0; i < books.length; i += size) rows.push(books.slice(i, i + size));
   return rows.length ? rows : [[]];
 }
 
@@ -67,23 +65,14 @@ export function Bookshelf({ books, copy }: Props) {
 
   return (
     <div className={styles.page}>
-      <section className={styles.hero} aria-label={copy.eyebrow}>
-        <div className={styles.heroCopy}>
-          <p className={styles.eyebrow}>{copy.eyebrow}</p>
-          <h1 className={styles.title}>
-            {copy.titleLines[0]}
-            <br />
-            {copy.titleLines[1]}
-          </h1>
-          <p className={styles.subtitle}>{copy.subtitle}</p>
-        </div>
-        <div className={styles.heroArt}>
-          {/* Figure cutout on the sky field — full poster kept at /bookshelf/confessions.png for reference */}
-          <img src="/bookshelf/reader.png" alt="Illustration of a reader stacking one more book" />
-        </div>
-      </section>
-
+      <p className={styles.introSub}>{copy.eyebrow}</p>
+      <h1 className={styles.introTitle}>{copy.title}</h1>
+      <p className={styles.introSub}>{copy.subtitle}</p>
       <p className={styles.shelfLead}>{copy.shelfLead}</p>
+
+      <div className={styles.art}>
+        <img src="/bookshelf/reader.png" alt="" />
+      </div>
 
       <div className={styles.unit}>
         {rows.map((row, rowIndex) => {
@@ -131,7 +120,7 @@ export function Bookshelf({ books, copy }: Props) {
           <button type="button" className={styles.backdrop} aria-label="Close book note" onClick={close} />
           <div className={styles.card} role="dialog" aria-modal="true" aria-labelledby={titleId}>
             <button ref={closeRef} type="button" className={styles.close} onClick={close}>
-              Esc
+              Close
             </button>
             <h2 id={titleId}>{active.title}</h2>
             <p className={styles.authors}>{active.authors}</p>
