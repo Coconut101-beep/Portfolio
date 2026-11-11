@@ -1,6 +1,6 @@
 # PROGRESS.md
 
-Session log for the Portfolio site. **Append only** — never rewrite earlier entries.
+Session log for the Profolio site. **Append only** — never rewrite earlier entries.
 
 ## Session table
 
@@ -21,7 +21,14 @@ Session log for the Portfolio site. **Append only** — never rewrite earlier en
 
 ### Docs bootstrap — 2026-11-11 (Europe/London)
 
-- Wrote engineering contract `AGENTS.md` and this `PROGRESS.md` in a new standalone `Portfolio` repo (no Lovable).
+- Wrote engineering contract `AGENTS.md` and this `PROGRESS.md` in a new standalone `Profolio` repo (no Lovable).
 - Files touched: `AGENTS.md`, `PROGRESS.md`, `README.md`.
-- Next: publish empty GitHub repo `Portfolio` under the owner account, then await go-ahead for **S0 Foundation** (no feature/components yet).
-- Need from owner: create `https://github.com/Coconut101-beep/Portfolio` (this agent cannot create repos with the current token), confirm the two docs, green-light S0.
+- Next: await go-ahead for **S0 Foundation** (no feature/components yet).
+- Need from owner: confirm the two docs, then green-light S0.
+
+### Remote published — 2026-11-11 (Europe/London)
+
+- Pushed foundation docs to `https://github.com/Coconut101-beep/Profolio`.
+- Files touched: `AGENTS.md`, `PROGRESS.md`, `README.md` (name aligned to Profolio).
+- Next: owner confirms docs; then S0.
+- Need from owner: confirm `AGENTS.md` / `PROGRESS.md`, green-light S0.
