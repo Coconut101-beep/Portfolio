@@ -9,7 +9,7 @@
 
 1. Add this file to the project as `docs/SURFER_INTRO_SPEC.md` (or paste it into project docs).
 2. Attach `reference-frames.png` (3 moments of the approved idea) to your first message.
-3. Send these short messages, one at a time, and wait for Cursor agents's report after each:
+3. Send these short messages, one at a time, and wait for the agent's report after each:
 
 | Step | Message to send |
 |---|---|
