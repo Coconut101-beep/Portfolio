@@ -32,3 +32,11 @@ Session log for the Portfolio site. **Append only** — never rewrite earlier en
 - Files touched: `AGENTS.md`, `PROGRESS.md`, `README.md` (name aligned to Portfolio).
 - Next: owner confirms docs; then S0.
 - Need from owner: confirm `AGENTS.md` / `PROGRESS.md`, green-light S0.
+
+### Remote push blocked — 2026-11-11 (Europe/London)
+
+- Target confirmed: `https://github.com/Coconut101-beep/Portfolio` (empty).
+- `git push` denied for `cursor[bot]` — Cursor GitHub App lacks write access to this repo.
+- Files ready locally: `AGENTS.md`, `PROGRESS.md`, `README.md` (`27ef7eb`).
+- Next: owner grants Cursor app access to `Portfolio`; agent re-pushes.
+- Need from owner: add repo in GitHub → Settings → Applications → Cursor → repository access.
