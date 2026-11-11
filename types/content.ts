@@ -36,6 +36,16 @@ export type Book = {
   spineColor: "ocean" | "rose" | "gold" | "mint" | "rust" | "sky";
   note: string[];
   quote?: string;
+  /** Optional height hint for organic shelf rhythm. */
+  stature?: "short" | "regular" | "tall";
+};
+
+export type BookshelfPageCopy = {
+  eyebrow: string;
+  titleLines: [string, string, string];
+  subtitle: string;
+  shelfLead: string;
+  roomForOneMoreLabel: string;
 };
 
 export type Post = {

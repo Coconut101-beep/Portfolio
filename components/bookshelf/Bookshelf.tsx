@@ -1,20 +1,31 @@
 "use client";
 
-import { useEffect, useId, useRef, useState, type KeyboardEvent } from "react";
-import type { Book } from "@/types/content";
+import { useEffect, useId, useMemo, useRef, useState, type KeyboardEvent } from "react";
+import type { Book, BookshelfPageCopy } from "@/types/content";
 import styles from "./bookshelf.module.css";
 
 type Props = {
   books: Book[];
-  lead: string;
+  copy: BookshelfPageCopy;
 };
 
-export function Bookshelf({ books, lead }: Props) {
+const PER_SHELF = 7;
+
+function chunkBooks(books: Book[], size: number) {
+  const rows: Book[][] = [];
+  for (let i = 0; i < books.length; i += size) {
+    rows.push(books.slice(i, i + size));
+  }
+  return rows.length ? rows : [[]];
+}
+
+export function Bookshelf({ books, copy }: Props) {
   const [activeId, setActiveId] = useState<string | null>(null);
   const active = books.find((b) => b.id === activeId) ?? null;
   const titleId = useId();
   const closeRef = useRef<HTMLButtonElement>(null);
   const bookRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+  const rows = useMemo(() => chunkBooks(books, PER_SHELF), [books]);
 
   useEffect(() => {
     if (!active) return;
@@ -37,56 +48,88 @@ export function Bookshelf({ books, lead }: Props) {
     if (id) bookRefs.current[id]?.focus();
   }
 
-  function onBookKeyDown(e: KeyboardEvent<HTMLButtonElement>, index: number) {
+  function onBookKeyDown(e: KeyboardEvent<HTMLButtonElement>, flatIndex: number) {
     if (e.key === "ArrowRight" || e.key === "ArrowDown") {
       e.preventDefault();
-      const next = books[(index + 1) % books.length];
+      const next = books[(flatIndex + 1) % books.length];
       if (next) bookRefs.current[next.id]?.focus();
     }
     if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
       e.preventDefault();
-      const prev = books[(index - 1 + books.length) % books.length];
+      const prev = books[(flatIndex - 1 + books.length) % books.length];
       if (prev) bookRefs.current[prev.id]?.focus();
     }
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
-      setActiveId(books[index]?.id ?? null);
+      setActiveId(books[flatIndex]?.id ?? null);
     }
   }
 
   return (
-    <div className={styles.wrap}>
-      <p className={styles.lead}>{lead}</p>
-      <div className={styles.shelf} role="toolbar" aria-label="Bookshelf">
-        {books.map((book, index) => (
-          <button
-            key={book.id}
-            ref={(el) => {
-              bookRefs.current[book.id] = el;
-            }}
-            type="button"
-            className={styles.book}
-            data-color={book.spineColor}
-            aria-haspopup="dialog"
-            aria-expanded={activeId === book.id}
-            onClick={() => setActiveId(book.id)}
-            onKeyDown={(e) => onBookKeyDown(e, index)}
-          >
-            {book.spineLabel}
-          </button>
-        ))}
+    <div className={styles.page}>
+      <section className={styles.hero} aria-label={copy.eyebrow}>
+        <div className={styles.heroCopy}>
+          <p className={styles.eyebrow}>{copy.eyebrow}</p>
+          <h1 className={styles.title}>
+            {copy.titleLines[0]}
+            <br />
+            {copy.titleLines[1]}
+          </h1>
+          <p className={styles.subtitle}>{copy.subtitle}</p>
+        </div>
+        <div className={styles.heroArt}>
+          {/* Figure cutout on the sky field — full poster kept at /bookshelf/confessions.png for reference */}
+          <img src="/bookshelf/reader.png" alt="Illustration of a reader stacking one more book" />
+        </div>
+      </section>
+
+      <p className={styles.shelfLead}>{copy.shelfLead}</p>
+
+      <div className={styles.unit}>
+        {rows.map((row, rowIndex) => {
+          const isLast = rowIndex === rows.length - 1;
+          return (
+            <div
+              key={`shelf-${rowIndex}`}
+              className={styles.shelf}
+              role="toolbar"
+              aria-label={`Bookshelf row ${rowIndex + 1}`}
+            >
+              {row.map((book) => {
+                const flatIndex = books.findIndex((b) => b.id === book.id);
+                return (
+                  <button
+                    key={book.id}
+                    ref={(el) => {
+                      bookRefs.current[book.id] = el;
+                    }}
+                    type="button"
+                    className={styles.book}
+                    data-color={book.spineColor}
+                    data-stature={book.stature ?? "regular"}
+                    aria-haspopup="dialog"
+                    aria-expanded={activeId === book.id}
+                    onClick={() => setActiveId(book.id)}
+                    onKeyDown={(e) => onBookKeyDown(e, flatIndex)}
+                  >
+                    {book.spineLabel}
+                  </button>
+                );
+              })}
+              {isLast ? (
+                <div className={styles.ghost} aria-hidden="true">
+                  {copy.roomForOneMoreLabel}
+                </div>
+              ) : null}
+            </div>
+          );
+        })}
       </div>
 
       {active ? (
         <>
           <button type="button" className={styles.backdrop} aria-label="Close book note" onClick={close} />
-          <div
-            className={styles.card}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby={titleId}
-            style={{ left: "50%", top: "50%", transform: "translate(-50%, -50%)" }}
-          >
+          <div className={styles.card} role="dialog" aria-modal="true" aria-labelledby={titleId}>
             <button ref={closeRef} type="button" className={styles.close} onClick={close}>
               Esc
             </button>

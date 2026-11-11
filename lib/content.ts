@@ -1,4 +1,4 @@
-import { books } from "@/data/books";
+import { books, bookshelfPage } from "@/data/books";
 import { clips } from "@/data/clips";
 import { photos } from "@/data/photos";
 import { posts } from "@/data/posts";
@@ -24,6 +24,10 @@ export function getProject(slug: string) {
 
 export function getBooks() {
   return books;
+}
+
+export function getBookshelfPage() {
+  return bookshelfPage;
 }
 
 export function getPosts() {

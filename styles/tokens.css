@@ -18,6 +18,8 @@
   --color-mint: #9fbea5;
   --color-rust: #ac5550;
   --color-sky: #8eafb7;
+  --color-bookshelf-sky: #9ec9e0;
+  --color-bookshelf-ink: #141414;
   --color-focus: #0a8a85;
 
   /* Type */
@@ -63,6 +65,12 @@
 
   /* Shelf */
   --shelf-depth: 0.75rem;
-  --book-width: 3.25rem;
-  --book-height: 11rem;
+  --book-width: 2.85rem;
+  --book-height: 10.5rem;
+  --book-width-dense: 2.35rem;
+  --book-height-short: 9rem;
+  --book-height-tall: 11.5rem;
+  --books-per-shelf: 10;
+  --shelf-gap: 1.25rem;
+  --motion-shelf-lift: 320ms;
 }

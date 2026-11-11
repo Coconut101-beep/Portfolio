@@ -1,27 +1,97 @@
-.wrap {
-  max-width: 48rem;
+.page {
+  display: grid;
+  gap: var(--space-6);
+  max-width: var(--page-max);
 }
 
-.lead {
+.hero {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: var(--space-5);
+  align-items: stretch;
+  background: var(--color-bookshelf-sky);
+  color: var(--color-bookshelf-ink);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  min-height: 22rem;
+}
+
+.heroCopy {
+  padding: var(--space-6) var(--space-6) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-5);
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-size: clamp(2.6rem, 7vw, 4.6rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+
+.subtitle {
+  margin: 0;
+  font-size: var(--text-sm);
+  max-width: 14rem;
+  line-height: 1.35;
+}
+
+.heroArt {
+  position: relative;
+  min-height: 18rem;
+  display: grid;
+  place-items: end center;
+  padding: var(--space-4);
+}
+
+.heroArt img {
+  width: min(100%, 18rem);
+  height: auto;
+  max-height: 22rem;
+  object-fit: contain;
+  /* reader.png is drawn on black — multiply lets the sky show through */
+  mix-blend-mode: multiply;
+}
+
+.shelfLead {
+  margin: 0;
   color: var(--color-ink-muted);
-  margin: 0 0 var(--space-6);
+  max-width: 40rem;
+}
+
+.unit {
+  display: grid;
+  gap: var(--shelf-gap);
 }
 
 .shelf {
   position: relative;
   display: flex;
+  flex-wrap: nowrap;
   align-items: flex-end;
-  gap: var(--space-2);
-  min-height: calc(var(--book-height) + var(--space-6));
-  padding: var(--space-4) var(--space-3) var(--space-5);
+  gap: 0.35rem;
+  min-height: calc(var(--book-height-tall) + var(--space-6));
+  padding: var(--space-4) var(--space-3) calc(var(--space-5) + var(--shelf-depth));
   background: linear-gradient(
     180deg,
-    color-mix(in oklab, var(--color-bg-elevated) 70%, white),
+    color-mix(in oklab, var(--color-bg-elevated) 65%, white),
     var(--color-bg-elevated)
   );
   border: 1px solid var(--color-line);
   border-radius: var(--radius-md);
   box-shadow: 0 var(--shelf-depth) 0 var(--color-shelf-shadow);
+  overflow-x: auto;
+  scrollbar-width: thin;
 }
 
 .shelf::after {
@@ -33,9 +103,11 @@
   height: var(--shelf-depth);
   background: var(--color-shelf);
   border-radius: 0 0 var(--radius-md) var(--radius-md);
+  pointer-events: none;
 }
 
 .book {
+  flex: 0 0 var(--book-width);
   width: var(--book-width);
   height: var(--book-height);
   border: 0;
@@ -44,17 +116,29 @@
   transform: rotate(180deg);
   font: inherit;
   font-size: var(--text-xs);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
   color: var(--color-foam);
   cursor: pointer;
-  transition: transform var(--motion-shelf) var(--ease-out), box-shadow var(--motion-shelf) var(--ease-out);
-  box-shadow: 0 0 0 transparent;
+  transition: transform var(--motion-shelf-lift) var(--ease-out), box-shadow var(--motion-shelf) var(--ease-out);
+  box-shadow: inset -2px 0 0 color-mix(in oklab, black 18%, transparent);
+}
+
+.book[data-stature="short"] {
+  height: var(--book-height-short);
+  flex-basis: var(--book-width-dense);
+  width: var(--book-width-dense);
+}
+
+.book[data-stature="tall"] {
+  height: var(--book-height-tall);
 }
 
 .book:hover,
 .book:focus-visible {
-  transform: rotate(180deg) translateX(0.4rem);
-  box-shadow: 0 8px 18px var(--color-shelf-shadow);
+  transform: rotate(180deg) translateX(0.45rem);
+  box-shadow:
+    inset -2px 0 0 color-mix(in oklab, black 18%, transparent),
+    0 10px 18px var(--color-shelf-shadow);
 }
 
 .book[data-color="ocean"] {
@@ -80,11 +164,27 @@
   color: var(--color-ink);
 }
 
+.ghost {
+  flex: 0 0 var(--book-width);
+  width: var(--book-width);
+  height: var(--book-height-short);
+  border: 1.5px dashed color-mix(in oklab, var(--color-ink) 35%, transparent);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  background: color-mix(in oklab, var(--color-bookshelf-sky) 35%, white);
+  color: var(--color-ink-muted);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font: inherit;
+  font-size: var(--text-xs);
+  cursor: default;
+}
+
 .backdrop {
   position: fixed;
   inset: 0;
   background: color-mix(in oklab, var(--color-ink) 45%, transparent);
   z-index: 40;
+  border: 0;
 }
 
 .card {
@@ -99,6 +199,9 @@
   width: min(34rem, calc(100vw - 2rem));
   max-height: min(70vh, 36rem);
   overflow: auto;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .card h2 {
@@ -135,13 +238,28 @@
 }
 
 @media (max-width: 860px) {
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .heroArt {
+    min-height: 16rem;
+    order: -1;
+  }
+
+  .title {
+    font-size: clamp(2.4rem, 12vw, 3.4rem);
+  }
+
   .card {
-    left: 0 !important;
-    right: 0 !important;
-    top: auto !important;
+    left: 0;
+    right: 0;
+    top: auto;
     bottom: 0;
     width: 100%;
     max-height: 70vh;
+    transform: none;
     border-radius: var(--radius-lg) var(--radius-lg) 0 0;
   }
 }
