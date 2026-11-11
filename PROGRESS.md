@@ -41,6 +41,14 @@ Session log for the Portfolio site. **Append only** — never rewrite earlier en
 - Next: owner grants Cursor app access to `Portfolio`; agent re-pushes.
 - Need from owner: add repo in GitHub → Settings → Applications → Cursor → repository access.
 
+### Session order clarified — 2026-11-11 (Europe/London)
+
+- Owner: sessions may run out of order / in parallel; start with first page, bookshelf, and projects.
+- Updated `AGENTS.md` Sessions section accordingly (S0 shell still first unless waived).
+- Files touched: `AGENTS.md`, `PROGRESS.md`.
+- Next: scaffold Portfolio web from the MD contract (not the old Lovable site).
+- Need from owner: Cursor write access to GitHub `Portfolio` for push; confirm palette if not the design-brief defaults.
+
 ### Surfer intro design brief filed — 2026-11-11 (Europe/London)
 
 - Added `docs/SURFER_INTRO_SPEC.md` plus `docs/reference-frames.png` (and related design refs).

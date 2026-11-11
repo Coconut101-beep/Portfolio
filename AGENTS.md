@@ -57,6 +57,10 @@ If a request would need edits in **two feature folders at once**, say so and pro
 Each session is a fresh chat. Each has a scope, a file allow-list, and a definition of done.
 If a task needs a file outside its allow-list, **stop and ask** instead of widening the change.
 
+Sessions are a **menu, not a strict queue**. The owner may run them out of order or book several at once.
+When multiple sessions run together: keep each feature inside its own folder, do not cross-import feature folders, and list every allow-list you are using in the five-line start reply.
+**S0 (shell + tokens + empty routes) still comes before any page that needs the shell**, unless the owner explicitly waives that.
+
 | Session | Scope | Allow-list (summary) | Done when |
 | --- | --- | --- | --- |
 | **S0** Foundation | Tokens, type scale, app shell, six empty routes, `AGENTS.md`, `PROGRESS.md` | `tokens.css`, `layout.tsx`, `components/shell/*`, `components/ui/*`, `app/*/page.tsx` stubs | All six routes render the shell on mobile and desktop with no content |

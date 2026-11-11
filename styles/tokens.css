@@ -1,0 +1,68 @@
+/* The only CSS file with raw values. */
+
+:root {
+  /* Colour */
+  --color-bg: #f3e7c4;
+  --color-bg-elevated: #f7efd6;
+  --color-ink: #2b2a28;
+  --color-ink-muted: #5c5954;
+  --color-accent: #0a8a85;
+  --color-accent-soft: #d9ebea;
+  --color-line: #c9b992;
+  --color-shelf: #8b6b4a;
+  --color-shelf-shadow: rgba(43, 42, 40, 0.18);
+  --color-foam: #f7efd6;
+  --color-ocean: #397d87;
+  --color-rose: #d79989;
+  --color-gold: #e5c879;
+  --color-mint: #9fbea5;
+  --color-rust: #ac5550;
+  --color-sky: #8eafb7;
+  --color-focus: #0a8a85;
+
+  /* Type */
+  --font-display: "Fraunces", "Times New Roman", serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: 2.25rem;
+  --text-4xl: 3rem;
+  --leading-tight: 1.15;
+  --leading-body: 1.65;
+  --tracking-wide: 0.08em;
+
+  /* Space */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --rail-width: 14rem;
+  --content-max: 42rem;
+  --page-max: 72rem;
+
+  /* Radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+
+  /* Motion */
+  --motion-fast: 120ms;
+  --motion-base: 220ms;
+  --motion-slow: 420ms;
+  --motion-shelf: 280ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.45, 0, 0.55, 1);
+
+  /* Shelf */
+  --shelf-depth: 0.75rem;
+  --book-width: 3.25rem;
+  --book-height: 11rem;
+}
