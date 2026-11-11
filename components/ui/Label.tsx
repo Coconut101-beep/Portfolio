@@ -1,15 +1,14 @@
 import type { ReactNode } from "react";
 
-/** Sub-label: body size, italic, weight 400. */
+/** Sub-heading style from design-guide: body size, italic. */
 export function Label({ children, className }: { children: ReactNode; className?: string }) {
   return (
     <span
       className={className}
       style={{
-        display: "inline",
-        fontSize: "var(--text-body)",
-        fontWeight: "var(--weight-regular)",
+        fontSize: "var(--text-h3)",
         fontStyle: "italic",
+        fontWeight: "var(--weight-regular)",
         color: "var(--color-ink)",
       }}
     >

@@ -83,3 +83,11 @@ Session log for the Portfolio site. **Append only** — never rewrite earlier en
 - Note: conflicts with the measured visual spec already applied (#F0E4C3 / Source Serif 4 / fixed columns). Awaiting owner on which wins.
 - Files touched: `docs/design-guide.md`, `PROGRESS.md`.
 - Next: owner confirms whether to keep measured spec or revert toward this guide.
+
+### Design guide migration — 2026-11-11 (Europe/London)
+
+- Owner chose `docs/design-guide.md` over the measured visual spec.
+- Migrated tokens (beige #F3E7C4, Tiffany links, sunset accent), Georgia system stack, 160px sticky tab rail, 576px content / 720px bookshelf, bookshelf spine palette, nav “— ” current state + 4px hover slide.
+- Files: `styles/tokens.css`, `app/{layout,globals,about,projects,thoughts,earth,clips}/**`, `components/{shell,ui,article,bookshelf}/**`, `data/books.ts`, `types/content.ts`, `docs/decisions.md`.
+- Next: avatar asset; real book notes; push when Cursor has write access to GitHub `Portfolio`; Surfer intro only when asked.
+- Need from owner: avatar; Cursor app write access to `Coconut101-beep/Portfolio`.

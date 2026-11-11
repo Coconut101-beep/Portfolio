@@ -6,7 +6,7 @@ export const metadata = { title: "Thoughts" };
 export default function ThoughtsPage() {
   const posts = getPosts();
   return (
-    <div>
+    <div className="content">
       <h1 style={{ margin: "0 0 var(--space-prose)" }}>Thoughts</h1>
       <ul className="prose-list">
         {posts.map((post) => (

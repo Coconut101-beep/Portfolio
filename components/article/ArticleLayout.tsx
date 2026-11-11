@@ -19,11 +19,11 @@ export function ArticleLayout({
   backLabel = "All projects",
 }: Props) {
   return (
-    <article>
+    <article className="content">
       {eyebrow ? <p style={{ fontStyle: "italic", marginBottom: "var(--space-prose)" }}>{eyebrow}</p> : null}
       <h1 style={{ margin: "0 0 var(--space-prose)" }}>{title}</h1>
       {summary ? <p>{summary}</p> : null}
-      <div style={{ display: "grid", gap: 0 }}>{children}</div>
+      <div>{children}</div>
       <p style={{ marginTop: "var(--space-section)" }}>
         <Link href={backHref}>← {backLabel}</Link>
       </p>

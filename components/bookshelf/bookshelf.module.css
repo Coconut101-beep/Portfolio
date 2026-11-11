@@ -1,23 +1,26 @@
 .page {
-  max-width: var(--text-width);
+  max-width: var(--bookshelf-max);
 }
 
 .introTitle {
-  margin: 0 0 var(--space-prose);
+  margin: 0 0 0.75em;
+  font-size: var(--text-h1);
+  font-weight: var(--weight-regular);
 }
 
 .introSub {
   font-style: italic;
-  margin: 0 0 var(--space-prose);
+  margin: 0 0 0.75em;
+  color: var(--color-ink-muted);
 }
 
 .shelfLead {
-  margin: 0 0 var(--space-section);
+  margin: 0 0 1.5em;
 }
 
 .art {
-  margin: 0 0 var(--space-section);
-  max-width: 220px;
+  margin: 0 0 1.5em;
+  max-width: 200px;
 }
 
 .art img {
@@ -38,10 +41,25 @@
   flex-wrap: nowrap;
   align-items: flex-end;
   gap: 0.3rem;
-  min-height: calc(var(--book-height-tall) + 1rem);
-  padding: 0 0 0.5rem;
+  min-height: calc(var(--book-height-tall) + 1.25rem);
+  padding: 12px 12px calc(12px + var(--shelf-depth));
   overflow-x: auto;
-  background: transparent;
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: 0 var(--shelf-depth) 0 var(--color-shelf-shadow);
+}
+
+.shelf::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--shelf-depth);
+  background: var(--color-shelf);
+  border-radius: 0 0 var(--radius) var(--radius);
+  pointer-events: none;
 }
 
 .book {
@@ -49,16 +67,16 @@
   width: var(--book-width);
   height: var(--book-height);
   border: 0;
-  border-radius: 0;
+  border-radius: 2px 2px 0 0;
   writing-mode: vertical-rl;
   transform: rotate(180deg);
   font: inherit;
-  font-size: 13px;
+  font-size: 12px;
   letter-spacing: 0.02em;
-  color: var(--color-ink);
+  color: var(--color-book-paper);
   cursor: pointer;
-  transition: transform var(--motion-shelf-lift) var(--ease-out);
-  padding: 0.4rem 0.15rem;
+  transition: transform var(--motion-shelf-lift) ease;
+  padding: 0.35rem 0.1rem;
 }
 
 .book[data-stature="short"] {
@@ -73,64 +91,37 @@
 
 .book:hover,
 .book:focus-visible {
-  transform: rotate(180deg) translateX(0.35rem);
+  transform: rotate(180deg) translateX(4px);
 }
 
-/* Bank fills — text stays ink on creams/lights; foam text on deeps */
-.book[data-color="foam"],
-.book[data-color="shell"],
-.book[data-color="parchment"],
-.book[data-color="sand"],
-.book[data-color="apricot"],
-.book[data-color="blush-clay"],
-.book[data-color="sea-glass"],
-.book[data-color="sage"] {
-  color: var(--color-ink);
-}
-
-.book[data-color="terracotta"],
-.book[data-color="eucalyptus"],
-.book[data-color="deep-teal"],
-.book[data-color="slate-blue"],
-.book[data-color="oxblood"],
-.book[data-color="stone"] {
-  color: var(--color-foam);
-}
-
-.book[data-color="foam"] { background: var(--color-foam); }
-.book[data-color="shell"] { background: var(--color-shell); }
-.book[data-color="parchment"] { background: var(--color-parchment); }
-.book[data-color="sand"] { background: var(--color-sand); }
-.book[data-color="apricot"] { background: var(--color-apricot); }
-.book[data-color="blush-clay"] { background: var(--color-blush-clay); }
-.book[data-color="terracotta"] { background: var(--color-terracotta); }
-.book[data-color="sea-glass"] { background: var(--color-sea-glass); }
-.book[data-color="sage"] { background: var(--color-sage); }
-.book[data-color="eucalyptus"] { background: var(--color-eucalyptus); }
-.book[data-color="deep-teal"] { background: var(--color-deep-teal); }
-.book[data-color="slate-blue"] { background: var(--color-slate-blue); }
-.book[data-color="oxblood"] { background: var(--color-oxblood); }
-.book[data-color="stone"] { background: var(--color-stone); }
+.book[data-color="coral"] { background: var(--color-spine-coral); }
+.book[data-color="teal"] { background: var(--color-spine-teal); }
+.book[data-color="green"] { background: var(--color-spine-green); }
+.book[data-color="gold"] { background: var(--color-spine-gold); color: var(--color-book-ink); }
+.book[data-color="rose"] { background: var(--color-spine-rose); color: var(--color-book-ink); }
+.book[data-color="paper"] { background: var(--color-spine-paper); color: var(--color-book-ink); border: 1px solid var(--color-border); }
+.book[data-color="ink"] { background: var(--color-spine-ink); }
 
 .ghost {
   flex: 0 0 var(--book-width);
   width: var(--book-width);
   height: var(--book-height-short);
-  border: 0;
+  border: 1px dashed var(--color-border);
   background: transparent;
-  color: var(--color-stone);
+  color: var(--color-ink-muted);
   writing-mode: vertical-rl;
   transform: rotate(180deg);
   font: inherit;
-  font-size: 13px;
+  font-size: 12px;
   font-style: italic;
   cursor: default;
+  border-radius: 2px 2px 0 0;
 }
 
 .backdrop {
   position: fixed;
   inset: 0;
-  background: color-mix(in oklab, var(--color-ink) 28%, transparent);
+  background: color-mix(in oklab, var(--color-ink) 35%, transparent);
   z-index: 40;
   border: 0;
 }
@@ -141,47 +132,55 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: min(570px, calc(100vw - 2rem));
-  max-height: min(70vh, 36rem);
+  width: min(var(--bookshelf-max), calc(100vw - 2rem));
+  max-height: min(75vh, 40rem);
   overflow: auto;
-  background: var(--color-bg);
+  background: var(--color-book-page);
   color: var(--color-ink);
-  padding: 28px 28px 32px;
-  border: 0;
-  border-radius: 0;
-  box-shadow: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 48px 40px 40px;
+  box-shadow: 6px 6px 0 var(--color-card), 0 16px 32px var(--color-shelf-shadow);
 }
 
 .card h2 {
-  margin: 0 0 var(--space-prose);
-  font-size: var(--text-h1);
+  margin: 0;
+  text-align: center;
+  font-size: var(--text-book-title);
   font-weight: var(--weight-regular);
 }
 
 .authors {
-  margin: 0 0 var(--space-prose);
+  margin: 6px 0 20px;
+  text-align: center;
+  font-size: var(--text-book-author);
   font-style: italic;
+  color: var(--color-ink-muted);
 }
 
 .card p {
-  margin: 0 0 var(--space-prose);
+  margin: 0 0 0.9em;
+  font-size: var(--text-book-note);
+  line-height: var(--leading-book);
 }
 
 .quote {
   font-style: italic;
+  border-left: 1px solid var(--color-ink);
+  padding-left: 12px;
 }
 
 .close {
   position: absolute;
-  top: 16px;
+  top: 14px;
   right: 16px;
   border: 0;
   background: transparent;
   font: inherit;
+  font-size: var(--text-topbar);
   cursor: pointer;
   color: var(--color-accent);
   text-decoration: underline;
-  text-decoration-thickness: var(--link-underline-width);
   text-underline-offset: var(--link-underline-offset);
 }
 
@@ -192,7 +191,9 @@
     top: auto;
     bottom: 0;
     width: 100%;
-    max-height: 70vh;
+    max-height: 75vh;
     transform: none;
+    border-radius: var(--radius) var(--radius) 0 0;
+    padding: 40px 20px 28px;
   }
 }

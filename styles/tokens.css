@@ -1,36 +1,66 @@
-/* The only CSS file with raw values. */
+/* The only CSS file with raw values.
+   Source of truth for design: docs/design-guide.md */
 
 :root {
-  /* ——— Palette: core (3 colours) ——— */
-  --color-bg: #f0e4c3; /* page — warmer than foam, intentional */
-  --color-ink: #282624; /* text — never #000 */
-  --color-accent: #34827e; /* links only */
-  --color-nav-current: #7d7768; /* current-page marker in nav only */
+  /* ——— Core (design-guide) ——— */
+  --color-bg: #f3e7c4; /* beige yellow */
+  --color-ink: #2b2a28;
+  --color-accent: #0a8a85; /* deep Tiffany — links */
+  --color-ink-muted: #5e574d; /* muted / placeholder */
+  --color-card: #f7eed6; /* card / paper */
+  --color-book-page: #fbf8ee; /* book popover */
+  --color-border: #d6cdb2;
+  --color-sunset: #df7a3e; /* accent sunset */
 
-  /* ——— Colour bank (supporting; never body text; ≤2 on one screen) ——— */
-  /* Creams and paper */
+  /* Aliases */
+  --color-bg-elevated: var(--color-card);
+  --color-focus: var(--color-accent);
+  --color-line: var(--color-border);
+  --color-nav-current: var(--color-ink);
+  --color-shelf: #c4b48a;
+  --color-shelf-shadow: rgba(43, 42, 40, 0.18);
+
+  /* Opening (surfer) palette */
+  --color-wave-teal: #397d87;
+  --color-wave-rose: #d79989;
+  --color-wave-gold: #e5c879;
+  --color-wave-mint: #9fbea5;
+  --color-wave-rust: #ac5550;
+  --color-wave-sky: #8eafb7;
+
+  /* Bookshelf palette */
+  --color-book-paper: #f4e8c9;
+  --color-book-ink: #292b28;
+  --color-book-coral: #bf7160;
+  --color-book-teal: #568d90;
+  --color-book-green: #8ba183;
+  --color-book-gold: #d1af67;
+  --color-book-rose: #d19ca7;
+
+  /* Spine token names (map to bookshelf palette) */
+  --color-spine-coral: var(--color-book-coral);
+  --color-spine-teal: var(--color-book-teal);
+  --color-spine-green: var(--color-book-green);
+  --color-spine-gold: var(--color-book-gold);
+  --color-spine-rose: var(--color-book-rose);
+  --color-spine-paper: var(--color-book-paper);
+  --color-spine-ink: var(--color-book-ink);
+
+  /* Supporting bank (artwork; spines may also use these) */
   --color-foam: #f0eadf;
   --color-shell: #eee5d7;
   --color-parchment: #e7e1ce;
   --color-sand: #e1c89c;
-
-  /* Warm mids */
   --color-apricot: #dfb795;
   --color-blush-clay: #daa78e;
   --color-terracotta: #be7a69;
-
-  /* Greens and teals */
   --color-sea-glass: #9ebeb3;
   --color-sage: #b8c6b4;
   --color-eucalyptus: #78a595;
   --color-deep-teal: #568c89;
-
-  /* Deeps */
   --color-slate-blue: #4a6971;
   --color-oxblood: #944847;
   --color-stone: #a4a297;
-
-  /* Fixed series order (charts / multi-colour UI) */
   --series-1: #568c89;
   --series-2: #be7a69;
   --series-3: #78a595;
@@ -38,88 +68,83 @@
   --series-5: #4a6971;
   --series-6: #944847;
 
-  /* Aliases used by layout primitives */
-  --color-ink-muted: var(--color-stone);
-  --color-focus: var(--color-accent);
-  --color-line: transparent; /* no borders in the visual spec */
-  --color-bg-elevated: var(--color-bg);
-  --color-shelf: var(--color-sand);
-  --color-shelf-shadow: transparent; /* no shadows */
-
-  /* ——— Type ——— */
-  --font-serif: "Source Serif 4", "Iowan Old Style", "Palatino Linotype", Palatino, serif;
+  /* ——— Type (design-guide: Georgia, weight 400, lh 1.6) ——— */
+  --font-serif: Georgia, "Times New Roman", serif;
   --font-display: var(--font-serif);
-  --font-sans: var(--font-serif); /* no sans anywhere */
+  --font-sans: var(--font-serif);
 
-  --text-body: 17.5px;
-  --text-h1: 28px;
-  --text-h2: 19px;
-  --leading-body: 26px; /* ~1.485 */
-  --leading-tight: 1.25;
+  --text-body: 16px;
+  --text-h1: 24px;
+  --text-h2: 18px;
+  --text-h3: 16px;
+  --text-topbar: 14px;
+  --text-name: 16px;
+  --text-follow: 12px;
+  --text-book-title: 24px;
+  --text-book-author: 14px;
+  --text-book-note: 15px;
+
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 16px;
+  --text-xl: 18px;
+  --text-2xl: 24px;
+  --text-3xl: 24px;
+  --text-4xl: 24px;
+
+  --leading-body: 1.6;
+  --leading-tight: 1.35;
+  --leading-book: 1.7;
   --weight-regular: 400;
-  --weight-medium: 500;
-
-  /* legacy size steps mapped to the serif scale */
-  --text-xs: 14px;
-  --text-sm: 15px;
-  --text-base: var(--text-body);
-  --text-lg: var(--text-body);
-  --text-xl: var(--text-h2);
-  --text-2xl: var(--text-h1);
-  --text-3xl: var(--text-h1);
-  --text-4xl: var(--text-h1);
+  --weight-medium: 400; /* headings stay regular */
   --tracking-wide: 0;
 
-  /* ——— Measure (from reference) ——— */
-  --page-pad-top: 90px;
-  --page-pad-bottom: 120px;
-  --nav-left: 455px;
-  --nav-width: 100px;
-  --text-left: 676px;
-  --text-width: 570px;
-  --identity-right: calc(100vw - (var(--text-left) + var(--text-width)));
-  --space-prose: 26px;
-  --space-section: 56px;
-  --space-list: 12px;
-  --link-underline-offset: 3px;
+  /* ——— Layout ——— */
+  --page-pad: 24px;
+  --page-pad-wide: 32px;
+  --rail-width: 160px;
+  --content-max: 576px;
+  --bookshelf-max: 720px;
+  --page-max: 1100px;
+  --avatar-size: 44px;
+  --radius: 8px;
+  --radius-sm: 8px;
+  --radius-md: 8px;
+  --radius-lg: 8px;
+  --link-underline-offset: 2px;
   --link-underline-width: 1px;
-  --link-underline-hover: 2px;
-  --avatar-size: 40px;
+  --nav-hover-shift: 4px;
 
-  /* Spacing scale (derived, still raw only here) */
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
   --space-4: 16px;
-  --space-5: 26px;
-  --space-6: 40px;
-  --space-7: 56px;
-  --space-8: 90px;
-  --rail-width: var(--nav-width);
-  --content-max: var(--text-width);
-  --page-max: calc(var(--text-left) + var(--text-width));
-
-  /* Radius — unused in UI (no cards); kept for rare assets */
-  --radius-sm: 0;
-  --radius-md: 0;
-  --radius-lg: 0;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-prose: 1em;
+  --space-section: 2em;
+  --space-list: 0.5em;
 
   /* Motion */
-  --motion-fast: 120ms;
-  --motion-base: 180ms;
+  --motion-fast: 200ms;
+  --motion-base: 200ms;
   --motion-slow: 320ms;
-  --motion-shelf: 220ms;
-  --motion-shelf-lift: 220ms;
-  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --ease-in-out: cubic-bezier(0.45, 0, 0.55, 1);
+  --motion-shelf: 200ms;
+  --motion-shelf-lift: 200ms;
+  --ease-out: ease;
+  --ease-in-out: ease;
 
-  /* Shelf / spines */
-  --shelf-depth: 0;
-  --book-width: 2.6rem;
-  --book-height: 10rem;
-  --book-width-dense: 2.2rem;
-  --book-height-short: 8.5rem;
-  --book-height-tall: 11rem;
+  /* Shelf */
+  --shelf-depth: 6px;
+  --book-width: 2.75rem;
+  --book-height: 10.5rem;
+  --book-width-dense: 2.25rem;
+  --book-height-short: 9rem;
+  --book-height-tall: 11.5rem;
   --books-per-shelf: 7;
-  --shelf-gap: 40px;
+  --shelf-gap: 28px;
+  --book-cover-width: 120px;
 }

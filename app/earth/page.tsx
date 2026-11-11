@@ -5,7 +5,7 @@ export const metadata = { title: "Living on Earth" };
 export default function EarthPage() {
   const photos = getPhotos();
   return (
-    <div>
+    <div className="content">
       <h1 style={{ margin: "0 0 var(--space-prose)" }}>Living on Earth</h1>
       <p>Gallery arrives in a later session. For now, the groups live as a plain list.</p>
       <ul className="prose-list">

@@ -16,7 +16,7 @@ export function Nav({ className }: { className?: string }) {
         if (active) {
           return (
             <span key={item.href} className={styles.navCurrent} aria-current="page">
-              <span className={styles.navMarker}>—</span>
+              <span className={styles.navMarker}>— </span>
               {item.label}
             </span>
           );

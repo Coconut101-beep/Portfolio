@@ -8,11 +8,9 @@ export const metadata = {
 export default function ProjectsPage() {
   const projects = getProjects();
   return (
-    <div>
-      <h1 style={{ margin: "0 0 var(--space-prose)" }}>Projects</h1>
-      <p>
-        Prototypes and workflows — each one a loop from research to something people can use.
-      </p>
+    <div className="content">
+      <h1 style={{ margin: "0 0 0.75em" }}>Projects</h1>
+      <p>Prototypes and workflows — each one a loop from research to something people can use.</p>
       <ul className="prose-list">
         {projects.map((p) => (
           <li key={p.slug}>

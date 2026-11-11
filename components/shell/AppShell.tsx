@@ -7,10 +7,16 @@ import styles from "./shell.module.css";
 export function AppShell({ children }: { children: ReactNode }) {
   return (
     <div className={styles.frame}>
-      <IdentityBlock />
-      <Rail />
-      <MobileMenu />
-      <main className={styles.main}>{children}</main>
+      <div className={styles.inner}>
+        <IdentityBlock />
+        <div className={styles.body}>
+          <Rail />
+          <div>
+            <MobileMenu />
+            <main className={styles.main}>{children}</main>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

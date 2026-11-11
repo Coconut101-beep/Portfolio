@@ -16,22 +16,8 @@ export type Profile = {
   avatarSrc?: string;
 };
 
-/** Spine colours — named bank keys only, stored per book in data/books.ts */
-export type SpineColor =
-  | "foam"
-  | "shell"
-  | "parchment"
-  | "sand"
-  | "apricot"
-  | "blush-clay"
-  | "terracotta"
-  | "sea-glass"
-  | "sage"
-  | "eucalyptus"
-  | "deep-teal"
-  | "slate-blue"
-  | "oxblood"
-  | "stone";
+/** Bookshelf spine colours from docs/design-guide.md */
+export type SpineColor = "coral" | "teal" | "green" | "gold" | "rose" | "paper" | "ink";
 
 export type Book = {
   id: string;
