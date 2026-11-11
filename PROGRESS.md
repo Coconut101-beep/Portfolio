@@ -76,3 +76,10 @@ Session log for the Portfolio site. **Append only** — never rewrite earlier en
 - Files: `styles/tokens.css`, `app/**`, `components/{shell,ui,article,bookshelf}/**`, `data/{books,profile}.ts`, `types/content.ts`, `lib/content.ts`, `docs/decisions.md`.
 - Next: avatar image; push when GitHub access granted; real book notes.
 - Need from owner: avatar asset; Cursor write access to `Portfolio`.
+
+### Design guide filed — 2026-11-11 (Europe/London)
+
+- Added `docs/design-guide.md` (older Lovable-era guide).
+- Note: conflicts with the measured visual spec already applied (#F0E4C3 / Source Serif 4 / fixed columns). Awaiting owner on which wins.
+- Files touched: `docs/design-guide.md`, `PROGRESS.md`.
+- Next: owner confirms whether to keep measured spec or revert toward this guide.
