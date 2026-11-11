@@ -6,10 +6,10 @@ Session log for the Portfolio site. **Append only** — never rewrite earlier en
 
 | Session | Name | Status | Notes |
 | --- | --- | --- | --- |
-| S0 | Foundation | pending | Tokens, shell, six empty routes, `AGENTS.md`, `PROGRESS.md` |
-| S1 | Content model | pending | Types + seed data; plain-text lists |
-| S2 | Bookshelf | pending | Interactive shelf + card |
-| S3 | Article + projects | pending | Shared article layout + project pages |
+| S0 | Foundation | in progress | Tokens, shell, six routes scaffolded in Next.js |
+| S1 | Content model | in progress | Seed data + `lib/content.ts` in place (some LOREM) |
+| S2 | Bookshelf | in progress | Interactive shelf + card (hover/keyboard/Esc/mobile sheet) |
+| S3 | Article + projects | in progress | Shared article layout + project index/detail |
 | S4 | Thoughts | pending | Reuse article layout untouched |
 | S5 | Gallery + Living on Earth | pending | Grid + lightbox + photo groups |
 | S6 | Clips of life | pending | Reuse gallery untouched |
@@ -55,3 +55,10 @@ Session log for the Portfolio site. **Append only** — never rewrite earlier en
 - Files touched: `docs/SURFER_INTRO_SPEC.md`, `docs/reference-frames.png`, `docs/surfer-intro-how-to.png`, `docs/bookshelf-confessions-reference.png`, `PROGRESS.md`.
 - Next: push when Cursor has write access; still awaiting confirm on `AGENTS.md` / `PROGRESS.md` before S0; do **not** start Surfer Phase 0 until explicitly asked.
 - Need from owner: Cursor app access to `Portfolio` for push; then green-light order (docs confirm → S0 vs Surfer Phase 0).
+
+### S0–S3 scaffold started — 2026-11-11 (Europe/London)
+
+- Built Next.js Portfolio from `AGENTS.md` (not the old Lovable site). About, Bookshelf, Projects live locally.
+- Files touched: `styles/tokens.css`, `app/**`, `components/{shell,ui,article,bookshelf}/**`, `data/**`, `lib/content.ts`, `types/content.ts`, `docs/decisions.md`, package files.
+- Next: grant Cursor write access to GitHub `Portfolio` so we can push; then polish + publish shareable link.
+- Need from owner: Cursor app access to `Coconut101-beep/Portfolio`; feedback on first-page / shelf / project look.
