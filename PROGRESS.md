@@ -62,3 +62,10 @@ Session log for the Portfolio site. **Append only** — never rewrite earlier en
 - Files touched: `styles/tokens.css`, `app/**`, `components/{shell,ui,article,bookshelf}/**`, `data/**`, `lib/content.ts`, `types/content.ts`, `docs/decisions.md`, package files.
 - Next: grant Cursor write access to GitHub `Portfolio` so we can push; then polish + publish shareable link.
 - Need from owner: Cursor app access to `Coconut101-beep/Portfolio`; feedback on first-page / shelf / project look.
+
+### S2 Bookshelf redesign — 2026-11-11 (Europe/London)
+
+- Poster-style hero + multi-row shelves (7 per row) so all books fit; empty “room for one more” slot.
+- Files: `components/bookshelf/*`, `data/books.ts`, `app/books/page.tsx`, `styles/tokens.css`, `types/content.ts`, `lib/content.ts`, `public/bookshelf/*`.
+- Next: replace LOREM book titles/notes with real ones; push when GitHub access granted.
+- Need from owner: real book list / notes; Cursor write access to `Portfolio`.
