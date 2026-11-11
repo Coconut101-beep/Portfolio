@@ -5,7 +5,7 @@ Treat the design brief as the source of truth for visual design.
 Treat **this file** as the source of truth for architecture.
 If the two conflict: **this file wins for architecture; the brief wins for design.**
 
-This repository (`Profolio`) is standalone. It is not connected to Lovable.
+This repository (`Portfolio`) is standalone. It is not connected to Lovable.
 
 ## Hard module boundaries
 
