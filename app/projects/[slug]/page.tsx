@@ -6,7 +6,10 @@ import { getProject, getProjects } from "@/lib/content";
 type Props = { params: Promise<{ slug: string }> };
 
 export function generateStaticParams() {
-  return getProjects().map((p) => ({ slug: p.slug }));
+  // Dedicated routes under app/projects/<slug>/ take precedence (e.g. logistic-regression notebook).
+  return getProjects()
+    .filter((p) => p.slug !== "logistic-regression")
+    .map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: Props) {

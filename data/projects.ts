@@ -54,7 +54,7 @@ export const projects: Project[] = [
     links: {
       repo: "https://github.com/Coconut101-beep/Data",
       notebook: "https://github.com/Coconut101-beep/Data/blob/main/notebooks/AM04_Project1_Chuni.ipynb",
-      demo: "https://github.com/Coconut101-beep/Data/blob/main/site/index.html",
+      demo: "/projects/logistic-regression",
       writeup: "https://github.com/Coconut101-beep/Data/blob/main/docs/phase-0-audit.md",
       related: "https://github.com/Coconut101-beep/DataCrunch",
       primary: "demo",

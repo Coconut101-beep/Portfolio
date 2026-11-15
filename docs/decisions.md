@@ -23,3 +23,7 @@ Lending Club Defaults lives at `/projects/logistic-regression`. Educational cata
 ## 2026-11-15 — Projects origin star map
 
 Projects index uses an ORIGIN star map (`components/projects/ProjectStarMap`, `data/project-stars.ts`) per the attached layout. Design-guide beige / ink / Tiffany only; monospace is local to the map. Active **Data & Algorithms** opens `/projects/logistic-regression`.
+
+## 2026-11-15 — Merge main: Lending Club notebook route
+
+`main` added `app/projects/logistic-regression/page.tsx` + `public/lending-club/*` (interactive note via `Notebook`). That static route takes precedence over `app/projects/[slug]` for the same path. Star map still links there. Case-study fields remain in `data/projects.ts` for sync/catalog; the live URL currently renders the notebook shell from `main`.

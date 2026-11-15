@@ -109,3 +109,11 @@ Session log for the Portfolio site. **Append only** — never rewrite earlier en
 - Data & Algorithms → `/projects/logistic-regression`; Hackathon → DormVibe; Business Reflection → YOUBELONG.
 - Files: `components/projects/ProjectStarMap.tsx`, `star-map.module.css`, `data/project-stars.ts`, `styles/tokens.css`, pages, removed card grid files.
 - Next: owner confirm star angles/labels; optional second DA session when a real Data project ships.
+
+### Merge main into PR — 2026-11-15 (UTC)
+
+- Merged `origin/main` (`466d8f7` notebook + `public/lending-club/*`).
+- Conflict: `app/projects/page.tsx` → kept star map.
+- Deduped duplicate `logistic-regression` in `data/projects.ts` (kept PR Educational entry).
+- Kept main’s dedicated notebook page for that slug (shadows `[slug]` case-study render).
+- Next: owner decide whether case-study ArticleLayout should wrap/precede the notebook.
