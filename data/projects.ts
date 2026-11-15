@@ -46,4 +46,24 @@ export const projects: Project[] = [
     ],
     outcome: ["Most Promising Business Award"],
   },
+  {
+    slug: "logistic-regression",
+    title: "LendingClub default",
+    category: "Data",
+    period: "2026",
+    role: "Analyst",
+    summary: "Which Lending Club loans are worth funding, once a probability becomes a bet.",
+    problem:
+      "An investor decides which accepted loans to fund. The outcome is a yes or no charge-off, so the model has to give a probability.",
+    approach: [
+      "Fit logistic regression from income, then add term, grade, and loan amount.",
+      "Penalise a wider model and keep the one with the higher validation ROC-AUC.",
+      "Turn that probability into a funding rule and read the profit on loans the model did not train on.",
+    ],
+    outcome: [
+      "Validation ROC-AUC 0.697 for the spline LASSO, against 0.685 for logistic2.",
+      "At cutoff 0.1625, validation profit is $4.27 per candidate.",
+      "The LASSO’s top 700 loans return 24.59%.",
+    ],
+  },
 ];

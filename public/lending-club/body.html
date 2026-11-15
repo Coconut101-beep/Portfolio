@@ -1,0 +1,217 @@
+<div class="layout" id="top">
+    <nav class="side" aria-label="This note">
+      <p class="side-title">This note</p>
+      <a href="#label">The label</a>
+      <a href="#logistic">Why logistic regression</a>
+      <a href="#logistic2">logistic1, then logistic2</a>
+      <a href="#sample">Out of sample</a>
+      <a href="#chosen">The model we kept</a>
+      <a href="#case-1">Case 1</a>
+      <a href="#case-2">Case 2</a>
+      <a href="#case-3">Case 3</a>
+      <a href="#decision">Prediction and profit</a>
+    </nav>
+    <article>
+      <h1>LendingClub default</h1>
+      <p class="dek">Lending Club loans issued from June 2007 to December 2011. The work is done from an investor’s point of view: which loans are worth funding.</p>
+
+      <section class="intro">
+        <div class="intro-row">
+          <p>Imagine a bouncer deciding who can enter a club. Instead of judging by one detail, they consider several clues before making a decision. In loan default prediction, logistic regression does something similar: it examines an applicant’s income, existing debt and repayment history, giving each factor a weight based on patterns in past data. It then combines them to estimate a probability of default. If that probability is above the lender’s chosen threshold, the application can be flagged for further review. Like a bouncer, the model makes a judgement. It cannot know for certain what will happen.</p>
+          <img src="/lending-club/seagull.webp" alt="A seagull bouncer reads an application, weighs paid and late clues, and either approves the application or flags it for review.">
+        </div>
+      </section>
+
+      <h2 id="label">The label</h2>
+      <p>The file’s first row is a note, so the header is the second row. Loans with no interest rate are dropped. <code>loan_status</code> becomes the label: Charged Off is 1 and Fully Paid is 0. The first look is default by grade, default by number of delinquencies below 4, loan amount against default, income against default, and a correlation of loan amount, debt-to-income, and income with the label.</p>
+      <p>Home ownership is checked the same way. Mortgage, rent, and own do not separate cleanly. That chart describes the column. Which columns enter the model is decided by the fits below.</p>
+      <p>The chart uses every cleaned loan. Each point is a decile, and the height is the share that were charged off. Change the column to see the shape logistic2 is, and is not, able to follow.</p>
+      <figure>
+        <div class="controls">
+          <label>Column
+            <select id="bin-feature"></select>
+          </label>
+        </div>
+        <svg id="bin-chart" viewBox="0 0 680 300" role="img" aria-label="Default rate by decile"></svg>
+        <figcaption id="bin-note"></figcaption>
+      </figure>
+
+      <h2 id="logistic">Why logistic regression</h2>
+      <p>The question is yes or no: will this loan be charged off. An investor needs a probability, and a probability has to stay between 0 and 1. Income is the first clue, fit two ways, so the comparison is about one column. A straight line can give a negative probability once income is high enough, about $600,000, and it treats each extra dollar as the same reduction in risk. Logistic regression passes the score through a logit, so the probability stays between 0 and 1, and an extra dollar of income matters more at low incomes than at high ones. That income-only fit is logistic1. The outcome is binary, so the fit is by maximum likelihood rather than by least squares.</p>
+      <p>Maximum likelihood searches for the coefficients that make the observed pattern of charge-offs and repayments the most probable. The standard error is how much a coefficient would move from sample to sample. The p-value is the chance of a coefficient at least this far from zero if the column truly had no association with default. Deviance measures how far the fitted model is from a perfect fit. A lower deviance is a closer fit. AIC is that fit with a penalty for extra coefficients. Null deviance is the intercept-only model, which predicts the sample default rate for every loan.</p>
+
+      <h2 id="logistic2">logistic1, then logistic2</h2>
+      <p>logistic1 stops at income, so the comparison with a straight line is about one clue. A loan is more than the borrower’s income. logistic2 keeps that same income term and adds three facts that are known when the loan is offered: the term, 36 or 60 months; the lender’s grade; and the loan amount. Grade is the lender’s own ranking of the borrower. Term is how long the money is out. Loan amount is the size of the loan. These are the first four columns the notebook puts in one model. They are not a search over every column in the file.</p>
+      <p>On the full cleaned sample, residual deviance falls from 31,005 for logistic1 to 29,286 for logistic2. Null deviance is 31,130, so the four columns account for 1,844 of it. The drop from logistic1 is 1,719 for 8 extra degrees of freedom. Term, every grade, and income have p-values below 0.001. A 60-month term has a small standard error, about 0.036. Grade G has a larger one, about 0.134, which fits a rare grade. Loan amount has z = 1.211 and p = 0.226. After income, term, and grade, the size of the loan has no detectable association of its own with charge-off. Grade and term are why logistic2 replaces logistic1. Loan amount stays in the formula because the later models start from this one. Its coefficient did not clear 0.05.</p>
+      <p>The curve below is that equation, fit on the training rows of the 60/20/20 split. Term and grade enter as categories, so each level has its own coefficient. When the score is 0, the probability is one half. The $15 / $75 rule uses 0.167, lower on the same curve. Move the income. Grade and term shift the whole curve. Loan amount barely moves it.</p>
+      <div class="equation">
+        <p>score = β<sub>0</sub> + β<sub>1</sub> (annual income / 1,000)</p>
+        <p>+ term + grade + β<sub>4</sub> (loan amount)</p>
+        <p>P(charge-off) =
+          <span class="frac"><span>1</span><span>1 + e<sup>−score</sup></span></span>
+        </p>
+      </div>
+      <figure>
+        <div class="controls">
+          <fieldset>
+            <legend>Grade</legend>
+            <div id="grade-buttons" class="segment"></div>
+          </fieldset>
+          <fieldset>
+            <legend>Term</legend>
+            <div id="term-buttons" class="segment"></div>
+          </fieldset>
+          <label>Income <output id="income-out"></output>
+            <input id="income" type="range" min="0" max="39" value="12">
+          </label>
+          <label>Loan amount
+            <select id="amount"></select>
+          </label>
+        </div>
+        <svg id="curve-chart" viewBox="0 0 680 320" role="img" aria-label="Predicted probability against income"></svg>
+        <figcaption id="curve-readout"></figcaption>
+      </figure>
+
+      <h2 id="sample">Out of sample</h2>
+      <p>logistic2 is a small model, so the next check is whether it only memorised the rows it was trained on. On an 80/20 split with seed 1234, in-sample ROC-AUC is 0.6804 and out-of-sample ROC-AUC is 0.6779. The gap is too small to call overfitting. Four columns and 37,869 loans do not leave room to memorise which training loans defaulted.</p>
+      <p>The same split is repeated after adding 500 columns of random noise. The gap is 0.003 without the noise and 0.053 with it (in-sample 0.703, out-of-sample 0.650). Extra columns can look useful on the training loans and then fail on new ones. That is why the wider model below is not an unpenalised logistic regression on a long list. A penalty drops the weak columns, and the choice is made on a validation set. The test outcomes are not used to choose columns or the penalty.</p>
+      <p>The funding rules use a different split, seed 1111: 60% training, then the remainder halved into validation and test. Each of those two sets has 7,574 loans. The model is fit on the training loans. The cutoff, and later the portfolio, is chosen on the validation loans.</p>
+
+      <h2 id="chosen">The model we kept</h2>
+      <p>logistic2 leaves out other facts that are also known at the offer: the interest rate, the installment, debt-to-income, past delinquencies, employment length, home ownership, whether income was verified, and how large the payment is relative to income. The next model adds those. A column can enter only if the assessment loans can be scored with the same inputs. Issue date is left out. Purpose, state, zip, employer title, and the description exist only in the full file. They are tried, and then left out of the model that is kept.</p>
+      <p>The noise check is why this fit is penalised. Each numeric column enters as a cubic spline with 5 knots, so the effect is allowed to curve instead of being a straight line. An L1 penalty, the LASSO, is chosen by 5-fold cross-validation on the training set only. It keeps 30 of 76 terms and drops the rest. The strongest that remain are the interest-rate curve, the 60-month term, and income. Pairwise interactions, 329 candidate terms, did not raise the cross-validated AUC, so they were left out.</p>
+      <p>The model is chosen by validation ROC-AUC, on the same 7,574 loans. logistic2 scores 0.685. The LASSO with splines scores 0.697. A bootstrap interval for the difference is +0.006 to +0.019, so the gain is small and above zero. A gradient-boosting fit on the same columns reached about the same AUC, 0.697, so the LASSO is close to what these inputs can do. That is the model we keep. Adding the columns that are missing from the assessment file raised validation AUC from 0.697 to 0.707, but that model cannot score those loans, and the top-700 portfolio return did not improve (24.5% against 24.6%).</p>
+
+      <div class="table-wrap">
+        <table>
+          <caption>Validation comparison. The portfolio is the 700 validation loans with the highest expected return under a 60% loss on default.</caption>
+          <thead>
+            <tr><th></th><th>logistic2</th><th>LASSO with splines</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>ROC-AUC</td><td>0.685</td><td>0.697</td></tr>
+            <tr><td>Realised return, top 700</td><td>21.54%</td><td>24.59%</td></tr>
+            <tr><td>Profit on $700</td><td>$150.81</td><td>$172.15</td></tr>
+            <tr><td>Default rate of those 700</td><td>23.1%</td><td>20.6%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="case-1">Case 1. The same payoff on every loan</h2>
+      <p>logistic2 is used first to choose loans, before the wider model. The assumption is flat: a funded loan that is repaid gains $15, and a funded loan that is charged off loses $75. Fund the loan when the predicted probability of charge-off is at or below a cutoff. Thresholds run from 0.25% to 25% in steps of 0.25 points, and the cutoff is the one with the highest profit per candidate loan on the validation set.</p>
+      <p>That cutoff is 16.25%. It funds 5,121 of the 7,574 validation loans. Total profit is $32,355, which is $4.27 per candidate loan and $6.32 per funded loan. Of the funded loans, 494 default, 9.65%. A single funded loan has positive expected profit only when p is below 15/90, about 16.7%. The validation peak sits just under that point. At a 5% cutoff the rule funds almost nothing and profit is about $0.66 per candidate. At 25% it funds about 90% of loans and profit falls to $3.30.</p>
+      <div class="equation">
+        <p>Profit(t) = 15 n<sub>repaid</sub>(t) − 75 n<sub>default</sub>(t)</p>
+        <p>profit per candidate =
+          <span class="frac"><span>Profit(t)</span><span>7,574</span></span>
+        </p>
+        <p>expected profit of one funded loan = 15(1 − p) + (−75)p = 15 − 90p</p>
+      </div>
+      <p>The top panel is the validation probabilities from logistic2: repaid loans in stone, charge-offs in teal. The lower panel is profit per candidate loan. The line is the cutoff. Drag it. The mark is 16.25%.</p>
+      <figure>
+        <div class="controls">
+          <label>Cutoff <output id="cut-out"></output>
+            <input id="cutoff" type="range" min="0.0025" max="0.25" step="0.0025" value="0.1625">
+          </label>
+        </div>
+        <svg id="cut-chart" viewBox="0 0 680 440" role="img" aria-label="Validation probabilities and profit by cutoff"></svg>
+        <figcaption id="cut-readout"></figcaption>
+      </figure>
+      <p>A check of this cutoff on the test set was run with a different payoff, +$100 if repaid and −$500 if charged off. The profit from that check, $200,300, is not the profit under the $15 and $75 rule.</p>
+
+      <h2 id="case-2">Case 2. Each loan’s own return</h2>
+      <p>The flat $15 and $75 is then replaced. A repaid loan earns its own interest. A 36-month loan of $5,000 with an installment of $163 earns 163 × 36 / 5,000 − 1 = 17.36% if it is repaid. A default loses 60% of the amount invested, not 100%, because the loan may have paid something before it failed and part of it may be recovered. The stake is $1 in each loan.</p>
+      <div class="equation">
+        <p>r<sub>i</sub> =
+          <span class="frac"><span>installment<sub>i</sub> × term<sub>i</sub></span><span>L<sub>i</sub></span></span>
+          − 1
+        </p>
+        <p>R<sub>i</sub> =
+          <span class="cases"><span class="curly">{</span><span class="rows"><span>−0.60 &nbsp; if the loan is charged off</span><span>r<sub>i</sub> &nbsp; if the loan is repaid</span></span></span>
+        </p>
+      </div>
+      <p>Investing that $1 in every validation loan, with no model, returns 11.04%: about $836 on $7,574. If nobody had defaulted, the pool would have returned about 24.3%. The 1,098 defaults, 14.5% of the validation loans, pull the average down from about 23% on the repaid loans to 11%.</p>
+      <p>The realised return cannot be used to pick loans, because the default is not known at the time of the decision. logistic2’s probability is used instead. The loans are ranked by expected return, and the top n are funded. The chart is the realised return and the dollar profit of that top n. The average rises to about 26% near 200 loans, then falls toward 11% as weaker loans are added.</p>
+      <div class="equation">
+        <p>E[R<sub>i</sub>] = r<sub>i</sub> (1 − p<sub>i</sub>) + (−0.60) p<sub>i</sub></p>
+        <p>return(n) =
+          <span class="frac"><span>1</span><span>n</span></span>
+          <span class="sum"><sup>n</sup><span class="sigma">∑</span><sub>j = 1</sub></span>
+          R<sub>(j)</sub>
+        </p>
+        <p>profit(n) =
+          <span class="sum"><sup>n</sup><span class="sigma">∑</span><sub>j = 1</sub></span>
+          R<sub>(j)</sub>
+        </p>
+      </div>
+      <p>R<sub>(j)</sub> is the realised return of the loan with the j-th highest expected return. For logistic2, the top 700 validation loans return 21.54%, a profit of $150.81 on $700 invested. Their average expected return was 24.01%, and 23.1% of them defaulted. At 100 loans the realised return is about 22.5%, and near 200 loans it is about 26%. It is 11% when every loan is funded. Total profit keeps rising with n, because most loans are still profitable. More loans mean more dollars and a lower return per dollar.</p>
+      <figure>
+        <div class="controls">
+          <label>Loans funded, n <output id="portfolio-out"></output>
+            <input id="portfolio-n" type="range" min="25" max="7550" step="25" value="700">
+          </label>
+        </div>
+        <svg id="portfolio-chart" viewBox="0 0 680 440" role="img" aria-label="Realised return and profit against the number of loans funded"></svg>
+        <figcaption id="portfolio-readout"></figcaption>
+      </figure>
+      <p>The LASSO model, ranked the same way, selects a different 700. Realised return is 24.59%, profit is $172.15, and the default rate is 20.6%. That comparison sits next to ROC-AUC: the same rule, the same loss, a different probability.</p>
+      <p>Those 700 logistic2 loans are held fixed, and only the loss on default is changed, from 30% to 90%, using the observed defaults. Realised return falls in a straight line, from 28.5% at a 30% loss to 14.6% at a 90% loss. The 60% case is 21.5%. The slope is the portfolio’s default rate, 23.1%: each extra 10 points of loss costs about 2.3 points of return. At a 90% loss the profit is still about $102 on $700. The sign of the result does not flip inside this range. The size of the profit does.</p>
+      <div class="equation">
+        <p>return(ℓ) =
+          <span class="frac"><span>∑<sub> repaid</sub> r<sub>i</sub> − ℓ · n<sub>default</sub></span><span>700</span></span>
+          = a − ℓ × 0.231
+        </p>
+      </div>
+      <figure>
+        <div class="controls">
+          <label>Loss on default <output id="loss-out"></output>
+            <input id="loss" type="range" min="0.30" max="0.90" step="0.01" value="0.60">
+          </label>
+        </div>
+        <svg id="loss-chart" viewBox="0 0 680 280" role="img" aria-label="Return of the top 700 loans as the loss on default changes"></svg>
+        <figcaption id="loss-readout"></figcaption>
+      </figure>
+
+      <h2 id="case-3">Case 3. A collection cost on top of the 60% loss</h2>
+      <p>The $1-in-every-loan rule, with a 60% loss on default, is kept, and a collection cost of C dollars is added on each defaulted loan. The cost is shared in proportion to the investment, so a $1 stake in loan i pays C divided by that loan’s original amount, L<sub>i</sub>. d<sub>i</sub> is 1 if loan i is charged off and 0 if it is repaid. Because C is a single number multiplied through, the mean return is a straight line in C.</p>
+      <div class="equation">
+        <p>R<sub>i</sub>(C) = R<sub>i</sub> − d<sub>i</sub>
+          <span class="frac"><span>C</span><span>L<sub>i</sub></span></span>
+        </p>
+        <p>mean return(C) = 0.1104 − C · average(d<sub>i</sub> / L<sub>i</sub>)</p>
+        <p>C* =
+          <span class="frac"><span>∑ R<sub>i</sub></span><span>∑ (d<sub>i</sub> / L<sub>i</sub>)</span></span>
+          = $5,086.91
+        </p>
+      </div>
+      <p>The mean return is zero when C is about $5,087. It is 11.04% at C = 0, 8.87% at $1,000, and it falls by about 1.1 percentage points for every extra $500 of C. The break-even is high because the $1 stake pays only its share of C. On a typical defaulted loan of about $10,000, a $5,000 collection cost is about $0.50 per $1 invested, and it is charged only on the 14.5% of loans that default. The same C hurts a small loan more, because it is split across a smaller amount. C is calculated on this validation sample, 1,098 defaults out of 7,574 loans, and then dropped. The ranking that follows uses each loan’s own return, without this cost.</p>
+      <figure>
+        <div class="controls">
+          <label>Collection cost C <output id="cost-out"></output>
+            <input id="cost" type="range" min="0" max="6000" step="50" value="0">
+          </label>
+        </div>
+        <svg id="cost-chart" viewBox="0 0 680 280" role="img" aria-label="Mean return against the collection cost"></svg>
+        <figcaption id="cost-readout"></figcaption>
+      </figure>
+
+      <h2 id="decision">Prediction and the investment</h2>
+      <p>A model that ranks defaults well does not have to be a good way to choose loans. ROC-AUC treats every loan the same. The portfolio only buys the top of a ranking that mixes the probability with the loan’s own return. A missed default on a high-interest loan loses 60%. A safe loan that is wrongly skipped loses only its interest. The spline model’s AUC is 0.697 on all validation loans and 0.606 on the quarter of loans with the highest promised return, which is the region the portfolio actually buys from.</p>
+      <p>The same LASSO is refit with each training loan weighted by its repaid return plus 0.60, so a high-return loan counts more in the fit. Validation AUC stays 0.697. The top 700 return 24.0%, against 24.6% for the unweighted model. A top 1,010 is 22.0% against 21.9%. Stronger weights, and a model trained only on high-return loans, did slightly worse. The weights only range from about 0.6 to 1.3, so the fit barely changes, and the columns carry little extra information about which high-return loan will default. The unweighted model stays. The return of each loan is already used when the loans are ranked.</p>
+    
+      <p><a href="https://github.com/Coconut101-beep/Data" target="_blank" rel="noreferrer">github.com/Coconut101-beep/Data</a></p>
+    </article>
+    <nav class="toc" aria-label="Contents">
+      <p class="side-title">Contents</p>
+      <a href="#label">The label</a>
+      <a href="#logistic">Why logistic regression</a>
+      <a href="#logistic2">logistic1, then logistic2</a>
+      <a href="#sample">Out of sample</a>
+      <a href="#chosen">The model we kept</a>
+      <a href="#case-1">Case 1</a>
+      <a href="#case-2">Case 2</a>
+      <a href="#case-3">Case 3</a>
+      <a href="#decision">Prediction and profit</a>
+    </nav>
+  </div>
+  
