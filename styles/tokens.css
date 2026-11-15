@@ -134,8 +134,24 @@
   --motion-slow: 320ms;
   --motion-shelf: 200ms;
   --motion-shelf-lift: 200ms;
+  --motion-orbit: 18s;
+  --motion-pulse: 2.8s;
   --ease-out: ease;
   --ease-in-out: ease;
+
+  /* Projects star map (local monospace; colours stay on design-guide) */
+  --font-map: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+  --text-map: 12px;
+  --text-map-label: 13px;
+  --text-map-origin: 14px;
+  --map-max: 640px;
+  --map-grid: rgba(214, 205, 178, 0.55);
+  --map-orbit: #b8ae96;
+  --map-spoke: rgba(10, 138, 133, 0.4);
+  --map-active: var(--color-accent);
+  --map-active-glow: rgba(10, 138, 133, 0.28);
+  --map-soon: #b0a898;
+  --map-soon-label: var(--color-ink-muted);
 
   /* Shelf */
   --shelf-depth: 6px;

@@ -18,4 +18,8 @@ Owner confirmed `docs/design-guide.md` as the design source of truth over the me
 
 ## 2026-11-15 — Educational projects sync from Data
 
-Lending Club Defaults lives at `/projects/logistic-regression`. Educational catalog snapshots come from `Coconut101-beep/Data` via `npm run sync:data-projects` → `data/from-data/catalog.json`. Case-study prose stays hand-authored in `data/projects.ts` from notebook/audit only. Project index uses floating cards in `components/projects/` (design-guide palette). See `docs/data-portfolio-project-workflow.md`.
+Lending Club Defaults lives at `/projects/logistic-regression`. Educational catalog snapshots come from `Coconut101-beep/Data` via `npm run sync:data-projects` → `data/from-data/catalog.json`. Case-study prose stays hand-authored in `data/projects.ts` from notebook/audit only. See `docs/data-portfolio-project-workflow.md`.
+
+## 2026-11-15 — Projects origin star map
+
+Projects index uses an ORIGIN star map (`components/projects/ProjectStarMap`, `data/project-stars.ts`) per the attached layout. Design-guide beige / ink / Tiffany only; monospace is local to the map. Active **Data & Algorithms** opens `/projects/logistic-regression`.

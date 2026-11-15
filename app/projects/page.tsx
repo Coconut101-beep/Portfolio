@@ -1,18 +1,22 @@
-import { ProjectGrid } from "@/components/projects/ProjectGrid";
-import { getProjects } from "@/lib/content";
+import { ProjectStarMap } from "@/components/projects/ProjectStarMap";
+import { getProjectStarMapCopy, getProjectStars } from "@/lib/content";
 
 export const metadata = {
   title: "Projects",
 };
 
 export default function ProjectsPage() {
-  const projects = getProjects();
+  const stars = getProjectStars();
+  const copy = getProjectStarMapCopy();
+
   return (
     <div>
       <h1 style={{ margin: "0 0 0.75em" }}>Projects</h1>
-      <ProjectGrid
-        projects={projects}
-        lead="Prototypes, workflows and educational models — each card opens the case study."
+      <ProjectStarMap
+        stars={stars}
+        originLabel={copy.origin}
+        hint={copy.hint}
+        lead="Sessions radiate from origin — pick an active star to open the case study."
       />
     </div>
   );

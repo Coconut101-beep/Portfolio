@@ -90,3 +90,18 @@ export type Photo = {
   alt: string;
   group: string;
 };
+
+/** Star on the Projects origin map. Angles: 0° = top, clockwise. */
+export type ProjectStar = {
+  id: string;
+  label: string;
+  /** Outer code line, e.g. "DA · 2", or "soon" for muted nodes */
+  code: string;
+  /** Ring: 1 = inner, 2 = outer */
+  ring: 1 | 2;
+  /** Degrees from 12 o'clock, clockwise */
+  angle: number;
+  status: "active" | "soon";
+  /** Active stars open this project slug */
+  slug?: string;
+};

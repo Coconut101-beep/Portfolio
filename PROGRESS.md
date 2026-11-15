@@ -102,3 +102,10 @@ Session log for the Portfolio site. **Append only** — never rewrite earlier en
 - Files: `data/projects.ts`, `types/content.ts`, `components/projects/*`, `app/projects/*`, `app/about/page.tsx`, `scripts/sync-data-projects.mjs`, `docs/*`, `PROGRESS.md`.
 - Next: add `portfolio/projects.json` in Data; optional live host for Data `site/`; grant token read on Data for CI sync.
 - Need from owner: confirm card layout; Pages/host for interactive note if desired on-domain.
+
+### Projects star map — 2026-11-15 (UTC)
+
+- Replaced floating cards with ORIGIN star map (concentric orbits, active vs soon stars, Tiffany active nodes).
+- Data & Algorithms → `/projects/logistic-regression`; Hackathon → DormVibe; Business Reflection → YOUBELONG.
+- Files: `components/projects/ProjectStarMap.tsx`, `star-map.module.css`, `data/project-stars.ts`, `styles/tokens.css`, pages, removed card grid files.
+- Next: owner confirm star angles/labels; optional second DA session when a real Data project ships.

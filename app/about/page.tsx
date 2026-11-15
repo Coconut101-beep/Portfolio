@@ -1,5 +1,5 @@
-import { ProjectGrid } from "@/components/projects/ProjectGrid";
-import { getProfile, getProjects } from "@/lib/content";
+import { ProjectStarMap } from "@/components/projects/ProjectStarMap";
+import { getProfile, getProjectStarMapCopy, getProjectStars } from "@/lib/content";
 
 export const metadata = {
   title: "About",
@@ -7,7 +7,8 @@ export const metadata = {
 
 export default function AboutPage() {
   const profile = getProfile();
-  const projects = getProjects();
+  const stars = getProjectStars();
+  const copy = getProjectStarMapCopy();
 
   return (
     <div>
@@ -16,7 +17,7 @@ export default function AboutPage() {
         <p>{profile.shortBio}</p>
         <h2 style={{ margin: "1.75em 0 0.75em" }}>Selected work</h2>
       </div>
-      <ProjectGrid projects={projects} />
+      <ProjectStarMap stars={stars} originLabel={copy.origin} hint={copy.hint} />
     </div>
   );
 }

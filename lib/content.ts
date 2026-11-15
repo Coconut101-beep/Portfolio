@@ -3,6 +3,7 @@ import { clips } from "@/data/clips";
 import { photos } from "@/data/photos";
 import { posts } from "@/data/posts";
 import { following, navItems, profile } from "@/data/profile";
+import { projectStarMapCopy, projectStars } from "@/data/project-stars";
 import { projects } from "@/data/projects";
 
 /** The only place pages get data from. */
@@ -24,6 +25,14 @@ export function getProjects() {
 
 export function getProject(slug: string) {
   return projects.find((p) => p.slug === slug);
+}
+
+export function getProjectStars() {
+  return projectStars;
+}
+
+export function getProjectStarMapCopy() {
+  return projectStarMapCopy;
 }
 
 export function getBooks() {
