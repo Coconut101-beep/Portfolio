@@ -15,3 +15,7 @@ Matched the owner’s measured reference: three-colour core (#F0E4C3 / #282624 /
 ## 2026-11-11 — design-guide.md wins
 
 Owner confirmed `docs/design-guide.md` as the design source of truth over the measured visual spec. Tokens, Georgia type, 160px sticky tabs, 576px content / 720px bookshelf, Tiffany links, and bookshelf palette now follow that guide.
+
+## 2026-11-15 — Educational projects sync from Data
+
+Lending Club Defaults lives at `/projects/logistic-regression`. Educational catalog snapshots come from `Coconut101-beep/Data` via `npm run sync:data-projects` → `data/from-data/catalog.json`. Case-study prose stays hand-authored in `data/projects.ts` from notebook/audit only. Project index uses floating cards in `components/projects/` (design-guide palette). See `docs/data-portfolio-project-workflow.md`.

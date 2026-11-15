@@ -1,0 +1,157 @@
+.intro {
+  margin: 0 0 var(--space-5);
+  max-width: var(--content-max);
+}
+
+.grid {
+  --projects-max: min(100%, 52rem);
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15.5rem, 1fr));
+  gap: var(--space-5);
+  max-width: var(--projects-max);
+  padding: var(--space-2) 0 var(--space-7);
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-height: 11.5rem;
+  padding: var(--space-4);
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  color: inherit;
+  text-decoration: none;
+  box-shadow: 0 var(--space-1) var(--space-3) var(--color-shelf-shadow);
+  transform: translate3d(0, var(--float-y, 0), 0) rotate(var(--float-rot, 0deg));
+  transition:
+    transform var(--motion-slow) var(--ease-out),
+    box-shadow var(--motion-base) var(--ease-out),
+    border-color var(--motion-base) var(--ease-out);
+  animation: float-drift var(--float-duration, 7s) var(--ease-in-out) infinite alternate;
+  animation-delay: var(--float-delay, 0s);
+}
+
+.card:hover,
+.card:focus-visible {
+  text-decoration: none;
+  color: inherit;
+  border-color: var(--tone);
+  box-shadow: 0 var(--space-2) var(--space-5) var(--color-shelf-shadow);
+  transform: translate3d(0, calc(var(--float-y, 0px) - 6px), 0) rotate(0deg);
+  animation-play-state: paused;
+}
+
+.tone {
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 3px;
+  border-radius: var(--radius) var(--radius) 0 0;
+  background: var(--tone);
+}
+
+.meta {
+  margin: var(--space-2) 0 0;
+  color: var(--color-ink-muted);
+  font-size: var(--text-sm);
+  font-style: italic;
+}
+
+.title {
+  margin: 0;
+  font-size: var(--text-h2);
+  line-height: var(--leading-tight);
+}
+
+.summary {
+  margin: 0;
+  flex: 1;
+  color: var(--color-ink);
+  font-size: var(--text-sm);
+}
+
+.cta {
+  margin: 0;
+  color: var(--color-accent);
+  font-size: var(--text-sm);
+  text-decoration: underline;
+  text-underline-offset: var(--link-underline-offset);
+}
+
+.card:nth-child(1) {
+  --float-y: 0px;
+  --float-rot: -0.6deg;
+  --float-duration: 6.5s;
+  --float-delay: 0s;
+}
+
+.card:nth-child(2) {
+  --float-y: 10px;
+  --float-rot: 0.8deg;
+  --float-duration: 7.5s;
+  --float-delay: 0.4s;
+}
+
+.card:nth-child(3) {
+  --float-y: -6px;
+  --float-rot: -0.4deg;
+  --float-duration: 8s;
+  --float-delay: 0.8s;
+}
+
+.card:nth-child(4) {
+  --float-y: 8px;
+  --float-rot: 0.5deg;
+  --float-duration: 6.8s;
+  --float-delay: 0.2s;
+}
+
+.card:nth-child(5) {
+  --float-y: -4px;
+  --float-rot: -0.7deg;
+  --float-duration: 7.2s;
+  --float-delay: 1s;
+}
+
+.card:nth-child(6) {
+  --float-y: 12px;
+  --float-rot: 0.35deg;
+  --float-duration: 8.4s;
+  --float-delay: 0.6s;
+}
+
+@keyframes float-drift {
+  from {
+    transform: translate3d(0, var(--float-y, 0), 0) rotate(var(--float-rot, 0deg));
+  }
+  to {
+    transform: translate3d(0, calc(var(--float-y, 0px) * -1 - 8px), 0)
+      rotate(calc(var(--float-rot, 0deg) * -1));
+  }
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    --float-rot: 0deg;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    animation: none;
+    transform: none;
+  }
+
+  .card:hover,
+  .card:focus-visible {
+    transform: none;
+  }
+}

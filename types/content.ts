@@ -38,6 +38,22 @@ export type BookshelfPageCopy = {
   roomForOneMoreLabel: string;
 };
 
+/** Outbound artifacts — only real destinations; omit missing ones. */
+export type ProjectLinks = {
+  repo?: string;
+  notebook?: string;
+  demo?: string;
+  writeup?: string;
+  related?: string;
+  primary?: "repo" | "notebook" | "demo" | "writeup" | "related";
+};
+
+export type ProjectSection = {
+  id: string;
+  heading: string;
+  paragraphs: string[];
+};
+
 export type Project = {
   slug: string;
   title: string;
@@ -49,6 +65,15 @@ export type Project = {
   approach: string[];
   outcome: string[];
   technical?: string;
+  /** Quiet meta for Educational pages, e.g. Classification · Logistic regression */
+  method?: string;
+  links?: ProjectLinks;
+  /** Extra long-form sections after the case-study block (Educational explainers). */
+  sections?: ProjectSection[];
+  /** Source id in the Data repo catalog when this entry was synced. */
+  dataProjectId?: string;
+  /** Card accent from the design-guide colour bank (token name, not a raw hex). */
+  cardTone?: "teal" | "coral" | "gold" | "green" | "rose" | "sky";
 };
 
 export type Post = {
