@@ -1,0 +1,38 @@
+{
+  "$schema_comment": "Synced snapshot of Educational projects from Coconut101-beep/Data. Source of truth for new Educational rows: Data/portfolio/projects.json (see docs/data-portfolio-project-workflow.md).",
+  "sourceRepo": "Coconut101-beep/Data",
+  "sourcePath": "portfolio/projects.json",
+  "syncedAt": "2026-11-15",
+  "projects": [
+    {
+      "id": "lending-club-defaults",
+      "slug": "logistic-regression",
+      "title": "Lending Club Defaults",
+      "category": "Educational",
+      "period": "2026",
+      "role": "Analyst",
+      "method": "Classification · Logistic regression",
+      "summary": "Lending Club loans issued June 2007–December 2011, from an investor’s point of view: which loans are worth funding when the label is charge-off.",
+      "state": "In progress",
+      "links": {
+        "repo": "https://github.com/Coconut101-beep/Data",
+        "notebook": "https://github.com/Coconut101-beep/Data/blob/main/notebooks/AM04_Project1_Chuni.ipynb",
+        "demo": "https://github.com/Coconut101-beep/Data/blob/main/site/index.html",
+        "writeup": "https://github.com/Coconut101-beep/Data/blob/main/docs/phase-0-audit.md",
+        "related": "https://github.com/Coconut101-beep/DataCrunch",
+        "primary": "demo"
+      },
+      "metrics_from_source": {
+        "rows_raw": 42538,
+        "rows_model": 37869,
+        "default_rate": 0.1434,
+        "logistic2_validation_auc": 0.685,
+        "lasso_validation_auc": 0.697,
+        "flat_cutoff": 0.1625,
+        "flat_profit_per_candidate": 4.27,
+        "top700_return_logistic2": 0.2154,
+        "top700_return_lasso": 0.2459
+      }
+    }
+  ]
+}

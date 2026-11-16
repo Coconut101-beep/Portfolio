@@ -93,3 +93,27 @@ Session log for the Portfolio site. **Append only** — never rewrite earlier en
 - Branch: `cursor/design-guide-migration-7c77` (`91d5c89`) — `git push` still 403 for `cursor[bot]`.
 - Next: avatar asset; real book notes; grant Cursor write access then push/PR; Surfer intro only when asked.
 - Need from owner: avatar; Cursor app write access to `Coconut101-beep/Portfolio`.
+
+### Lending Club + Data sync — 2026-11-15 (UTC)
+
+- Added Educational project **Lending Club Defaults** at `/projects/logistic-regression` (case study + sections from Data notebook/audit/site only).
+- Projects index + About selected work use floating cards (`components/projects/*`); design-guide palette.
+- Sync: `npm run sync:data-projects`, `data/from-data/catalog.json`, `docs/data-portfolio-project-workflow.md`.
+- Files: `data/projects.ts`, `types/content.ts`, `components/projects/*`, `app/projects/*`, `app/about/page.tsx`, `scripts/sync-data-projects.mjs`, `docs/*`, `PROGRESS.md`.
+- Next: add `portfolio/projects.json` in Data; optional live host for Data `site/`; grant token read on Data for CI sync.
+- Need from owner: confirm card layout; Pages/host for interactive note if desired on-domain.
+
+### Projects star map — 2026-11-15 (UTC)
+
+- Replaced floating cards with ORIGIN star map (concentric orbits, active vs soon stars, Tiffany active nodes).
+- Data & Algorithms → `/projects/logistic-regression`; Hackathon → DormVibe; Business Reflection → YOUBELONG.
+- Files: `components/projects/ProjectStarMap.tsx`, `star-map.module.css`, `data/project-stars.ts`, `styles/tokens.css`, pages, removed card grid files.
+- Next: owner confirm star angles/labels; optional second DA session when a real Data project ships.
+
+### Merge main into PR — 2026-11-15 (UTC)
+
+- Merged `origin/main` (`466d8f7` notebook + `public/lending-club/*`).
+- Conflict: `app/projects/page.tsx` → kept star map.
+- Deduped duplicate `logistic-regression` in `data/projects.ts` (kept PR Educational entry).
+- Kept main’s dedicated notebook page for that slug (shadows `[slug]` case-study render).
+- Next: owner decide whether case-study ArticleLayout should wrap/precede the notebook.

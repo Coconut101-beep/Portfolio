@@ -1,29 +1,23 @@
-import { Link } from "@/components/ui/Link";
-import { getProjects } from "@/lib/content";
+import { ProjectStarMap } from "@/components/projects/ProjectStarMap";
+import { getProjectStarMapCopy, getProjectStars } from "@/lib/content";
 
 export const metadata = {
   title: "Projects",
 };
 
 export default function ProjectsPage() {
-  const projects = getProjects();
+  const stars = getProjectStars();
+  const copy = getProjectStarMapCopy();
+
   return (
-    <div className="content">
+    <div>
       <h1 style={{ margin: "0 0 0.75em" }}>Projects</h1>
-      <p>Each one is a loop from research to something people can use.</p>
-      <ul className="prose-list">
-        {projects.map((p) => (
-          <li key={p.slug}>
-            <Link href={`/projects/${p.slug}`}>{p.title}</Link>
-            {" — "}
-            {p.summary}{" "}
-            <em>
-              ({p.category}, {p.role}, {p.period})
-            </em>
-            .
-          </li>
-        ))}
-      </ul>
+      <ProjectStarMap
+        stars={stars}
+        originLabel={copy.origin}
+        hint={copy.hint}
+        lead="Sessions radiate from origin — pick an active star to open the case study."
+      />
     </div>
   );
 }

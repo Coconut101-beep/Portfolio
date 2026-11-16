@@ -20,10 +20,13 @@ Every area of the site owns its own folder. One concern, one home.
 | `/components/article/` | Shared long-form page layout. |
 | `/components/gallery/` | Shared photo grid and lightbox. |
 | `/components/bookshelf/` | Bookshelf and its pop-up card. Used by one page. |
+| `/components/projects/` | Projects origin star map (+ shared project detail helpers). |
 | `/app/<route>/page.tsx` | Thin: import a layout component, pass it data. |
 | `/data/<collection>.ts` | All copy and content, typed, one file per collection. |
+| `/data/from-data/` | Synced snapshot from the Data repo catalog (not hand prose). |
 | `/lib/content.ts` | The only place pages get data from. |
 | `/docs/decisions.md` | Short notes when a decision changes. |
+| `/docs/data-portfolio-project-workflow.md` | How Educational projects flow from Data → Portfolio. |
 
 ### Rules that make sessions safe
 
@@ -43,7 +46,8 @@ Ask for changes in these shapes. Each should touch one place:
 | --- | --- |
 | Change the background / accent / type | `styles/tokens.css` only |
 | Change a book note, add a book | `data/books.ts` only |
-| Add a project | `data/projects.ts` plus one route file |
+| Add a project | `data/projects.ts` (detail uses `[slug]`); Educational also update Data catalog — see `docs/data-portfolio-project-workflow.md` |
+| Change projects origin star map | `components/projects` + `data/project-stars.ts` |
 | Change how the bookshelf card looks or moves | `components/bookshelf` only |
 | Change the photo grid everywhere | `components/gallery` only |
 | Change how article pages are laid out | `components/article` only |

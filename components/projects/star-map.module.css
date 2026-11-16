@@ -1,0 +1,186 @@
+.wrap {
+  width: min(100%, var(--map-max));
+  margin: 0 0 var(--space-5);
+}
+
+.hintTop {
+  margin: 0 0 var(--space-4);
+  max-width: var(--content-max);
+  color: var(--color-ink);
+}
+
+.stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(var(--map-grid) 1px, transparent 1px) 0 0 / 28px 28px,
+    linear-gradient(90deg, var(--map-grid) 1px, transparent 1px) 0 0 / 28px 28px,
+    var(--color-card);
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.orbit {
+  fill: none;
+  stroke: var(--map-orbit);
+  stroke-width: 1.25;
+  stroke-dasharray: 5 7;
+  opacity: 0.9;
+}
+
+.orbits {
+  transform-origin: 320px 320px;
+  animation: orbit-spin var(--motion-orbit) linear infinite;
+}
+
+.spoke {
+  stroke: var(--map-spoke);
+  stroke-width: 1;
+}
+
+.origin {
+  fill: var(--color-ink);
+  font-family: var(--font-map);
+  font-size: var(--text-map-origin);
+  letter-spacing: 0.12em;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+.glow {
+  fill: var(--map-active-glow);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pulse-glow var(--motion-pulse) var(--ease-in-out) infinite;
+}
+
+.core {
+  fill: var(--map-active);
+}
+
+.coreSoon {
+  fill: var(--map-soon);
+}
+
+.float {
+  animation: star-float var(--motion-pulse) var(--ease-in-out) infinite alternate;
+}
+
+.node {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 7rem;
+  padding: var(--space-2) var(--space-3);
+  margin: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: center;
+  text-decoration: none;
+  font-family: var(--font-map);
+  pointer-events: auto;
+}
+
+.nodeActive {
+  cursor: pointer;
+}
+
+.nodeActive:hover .nodeLabel,
+.nodeActive:focus-visible .nodeLabel {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: var(--link-underline-offset);
+}
+
+.nodeActive:focus-visible {
+  outline: 1px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.nodeSoon {
+  pointer-events: none;
+  color: var(--map-soon-label);
+}
+
+.nodeDot {
+  display: none;
+}
+
+.nodeLabel {
+  font-size: var(--text-map-label);
+  line-height: 1.25;
+  color: var(--color-ink);
+}
+
+.nodeSoon .nodeLabel {
+  color: var(--map-soon-label);
+}
+
+.nodeCode {
+  font-size: var(--text-map);
+  line-height: 1.2;
+  color: var(--color-ink-muted);
+}
+
+.nodeSoon .nodeCode {
+  color: var(--map-soon-label);
+}
+
+.hint {
+  margin: var(--space-4) 0 0;
+  text-align: center;
+  color: var(--color-ink-muted);
+  font-family: var(--font-map);
+  font-size: var(--text-map);
+}
+
+@keyframes orbit-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.22);
+  }
+}
+
+@keyframes star-float {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orbits,
+  .glow,
+  .float {
+    animation: none;
+  }
+}

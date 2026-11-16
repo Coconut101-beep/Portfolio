@@ -1,0 +1,36 @@
+name: Sync Data projects catalog
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 6 * * 1"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Pull catalog from Data
+        env:
+          # PAT or fine-grained token with read access to Coconut101-beep/Data
+          GITHUB_TOKEN: ${{ secrets.DATA_REPO_READ_TOKEN }}
+        run: npm run sync:data-projects
+      - name: Open PR if catalog changed
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: sync Data educational project catalog"
+          title: "Sync Data educational project catalog"
+          body: |
+            Automated refresh of `data/from-data/catalog.json` from Coconut101-beep/Data.
+
+            If a **new** project appeared, merge narrative fields into `data/projects.ts` using only notebook/audit copy (see `docs/data-portfolio-project-workflow.md`).
+          branch: chore/sync-data-projects
+          delete-branch: true
