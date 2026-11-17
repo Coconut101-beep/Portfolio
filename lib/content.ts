@@ -1,5 +1,6 @@
 import { books, bookshelfPage } from "@/data/books";
 import { clips } from "@/data/clips";
+import { constellations } from "@/data/constellations";
 import { photos } from "@/data/photos";
 import { posts } from "@/data/posts";
 import { following, navItems, profile } from "@/data/profile";
@@ -33,6 +34,14 @@ export function getProjectStars() {
 
 export function getProjectStarMapCopy() {
   return projectStarMapCopy;
+}
+
+export function getConstellations() {
+  return constellations;
+}
+
+export function getConstellation(slug: string) {
+  return constellations.find((c) => c.slug === slug);
 }
 
 export function getBooks() {

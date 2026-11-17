@@ -2,7 +2,7 @@ import type { ProjectStar } from "@/types/content";
 
 /**
  * Projects origin map — positions match docs/media star-map layout.
- * Data & Algorithms → Lending Club Defaults (/projects/logistic-regression).
+ * Data & Algorithms → constellation page (/projects/data-algorithms).
  */
 export const projectStars: ProjectStar[] = [
   {
@@ -29,7 +29,7 @@ export const projectStars: ProjectStar[] = [
     ring: 1,
     angle: 42,
     status: "active",
-    slug: "logistic-regression",
+    slug: "data-algorithms",
   },
   {
     id: "business-reflection",

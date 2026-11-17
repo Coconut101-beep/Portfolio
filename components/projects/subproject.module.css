@@ -1,0 +1,205 @@
+.page {
+  width: min(100%, var(--map-max));
+  font-family: var(--font-map);
+}
+
+.crumb {
+  margin: 0 0 var(--space-4);
+  color: var(--color-ink-muted);
+  font-size: var(--text-map);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.crumb a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: var(--link-underline-offset);
+}
+
+.crumbSep {
+  margin: 0 0.4em;
+  color: var(--color-ink-muted);
+}
+
+.title {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-map);
+  font-size: var(--text-h1);
+  font-weight: var(--weight-regular);
+  letter-spacing: 0.02em;
+  color: var(--color-ink);
+}
+
+.subtitle {
+  margin: 0 0 var(--space-6);
+  color: var(--color-ink-muted);
+  font-size: var(--text-sm);
+}
+
+.stage {
+  position: relative;
+  width: 100%;
+  max-width: 28rem;
+  margin: 0 auto var(--space-7);
+  aspect-ratio: 1;
+  background:
+    linear-gradient(var(--map-grid) 1px, transparent 1px) 0 0 / 24px 24px,
+    linear-gradient(90deg, var(--map-grid) 1px, transparent 1px) 0 0 / 24px 24px,
+    var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.orbit {
+  fill: none;
+  stroke: var(--map-orbit);
+  stroke-width: 1.2;
+  stroke-dasharray: 4 6;
+}
+
+.axis {
+  stroke: var(--map-spoke);
+  stroke-width: 1;
+}
+
+.centre {
+  fill: var(--color-ink);
+  font-family: var(--font-map);
+  font-size: var(--text-map-origin);
+  letter-spacing: 0.14em;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+.glow {
+  fill: var(--map-active-glow);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pulse-glow var(--motion-pulse) var(--ease-in-out) infinite;
+}
+
+.core {
+  fill: var(--map-active);
+}
+
+.coreSoon {
+  fill: var(--map-soon);
+}
+
+.node {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 8rem;
+  padding: var(--space-2);
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  font-family: var(--font-map);
+}
+
+.nodeActive {
+  cursor: pointer;
+}
+
+.nodeActive:hover .nodeTitle,
+.nodeActive:focus-visible .nodeTitle {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: var(--link-underline-offset);
+}
+
+.nodeActive:focus-visible {
+  outline: 1px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.nodeSoon {
+  pointer-events: none;
+  color: var(--map-soon-label);
+}
+
+.nodeTitle {
+  font-size: var(--text-map-label);
+  line-height: 1.25;
+  color: var(--color-ink);
+}
+
+.nodeSoon .nodeTitle {
+  color: var(--map-soon-label);
+}
+
+.nodeYear {
+  font-size: var(--text-map);
+  color: var(--color-ink-muted);
+}
+
+.nodeSoon .nodeYear {
+  color: var(--map-soon-label);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-map);
+  color: var(--color-ink);
+}
+
+.table th,
+.table td {
+  padding: var(--space-3) var(--space-2);
+  border-bottom: 1px solid var(--color-border);
+  text-align: left;
+  font-weight: var(--weight-regular);
+  vertical-align: top;
+}
+
+.table th {
+  color: var(--color-ink-muted);
+  font-size: var(--text-map);
+  letter-spacing: 0.04em;
+}
+
+.table th:last-child,
+.table td:last-child {
+  text-align: right;
+}
+
+.table a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: var(--link-underline-offset);
+}
+
+.muted {
+  color: var(--color-ink-muted);
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glow {
+    animation: none;
+  }
+}

@@ -135,6 +135,8 @@
   --motion-shelf: 200ms;
   --motion-shelf-lift: 200ms;
   --motion-orbit: 18s;
+  --motion-orbit-slow: 28s;
+  --motion-orbit-fast: 16s;
   --motion-pulse: 2.8s;
   --ease-out: ease;
   --ease-in-out: ease;

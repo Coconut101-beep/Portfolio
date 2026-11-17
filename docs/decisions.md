@@ -27,3 +27,7 @@ Projects index uses an ORIGIN star map (`components/projects/ProjectStarMap`, `d
 ## 2026-11-15 — Merge main: Lending Club notebook route
 
 `main` added `app/projects/logistic-regression/page.tsx` + `public/lending-club/*` (interactive note via `Notebook`). That static route takes precedence over `app/projects/[slug]` for the same path. Star map still links there. Case-study fields remain in `data/projects.ts` for sync/catalog; the live URL currently renders the notebook shell from `main`.
+
+## 2026-11-17 — Constellation subproject display
+
+Origin map dots orbit their rings. **Data & Algorithms** opens `/projects/data-algorithms` (Figma subproject layout: INDEX/DA, DA-centred map, entry table). Lending Club Default from that page opens `/projects/logistic-regression`. Untitled study is soon/non-linking until a real artifact exists.

@@ -102,6 +102,32 @@ export type ProjectStar = {
   /** Degrees from 12 o'clock, clockwise */
   angle: number;
   status: "active" | "soon";
-  /** Active stars open this project slug */
+  /** Active stars open this project or constellation slug under /projects/ */
   slug?: string;
+};
+
+/** Entry on a constellation (subproject) display page. */
+export type ConstellationEntry = {
+  id: string;
+  title: string;
+  year: string;
+  tags: string[];
+  /** Degrees from 12 o'clock, clockwise */
+  angle: number;
+  ring: 1 | 2;
+  status: "active" | "soon";
+  /** Opens /projects/<slug> when active */
+  slug?: string;
+};
+
+export type Constellation = {
+  id: string;
+  /** Short code in the map centre, e.g. DA */
+  code: string;
+  /** Route slug under /projects/ */
+  slug: string;
+  title: string;
+  subtitle: string;
+  breadcrumbIndex: string;
+  entries: ConstellationEntry[];
 };
