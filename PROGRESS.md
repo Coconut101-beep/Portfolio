@@ -117,3 +117,10 @@ Session log for the Portfolio site. **Append only** — never rewrite earlier en
 - Deduped duplicate `logistic-regression` in `data/projects.ts` (kept PR Educational entry).
 - Kept main’s dedicated notebook page for that slug (shadows `[slug]` case-study render).
 - Next: owner decide whether case-study ArticleLayout should wrap/precede the notebook.
+
+### DA subproject display + orbit motion — 2026-11-17 (UTC)
+
+- Origin map dots now orbit their rings (labels track; reduced-motion freezes).
+- New `/projects/data-algorithms` subproject display (Figma): INDEX/DA, DA map, table.
+- DA star → constellation; Lending Club Default → `/projects/logistic-regression`.
+- Files: `components/projects/*`, `data/constellations.ts`, `data/project-stars.ts`, `app/projects/data-algorithms/page.tsx`, tokens, docs.

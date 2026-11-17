@@ -48,6 +48,7 @@ Ask for changes in these shapes. Each should touch one place:
 | Change a book note, add a book | `data/books.ts` only |
 | Add a project | `data/projects.ts` (detail uses `[slug]`); Educational also update Data catalog — see `docs/data-portfolio-project-workflow.md` |
 | Change projects origin star map | `components/projects` + `data/project-stars.ts` |
+| Change a constellation / subproject display | `data/constellations.ts` + `components/projects/SubprojectDisplay*` + route under `app/projects/<slug>` |
 | Change how the bookshelf card looks or moves | `components/bookshelf` only |
 | Change the photo grid everywhere | `components/gallery` only |
 | Change how article pages are laid out | `components/article` only |
