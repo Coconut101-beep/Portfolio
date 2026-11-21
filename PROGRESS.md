@@ -117,3 +117,44 @@ Session log for the Portfolio site. **Append only** — never rewrite earlier en
 - Deduped duplicate `logistic-regression` in `data/projects.ts` (kept PR Educational entry).
 - Kept main’s dedicated notebook page for that slug (shadows `[slug]` case-study render).
 - Next: owner decide whether case-study ArticleLayout should wrap/precede the notebook.
+
+### S8 project star map — 2026-11-22
+
+- Made both orbits static, matched spokes to inactive dots, and gave active dots dark blue cores, translucent rims, and radial motion.
+- Updated components/projects/ProjectStarMap.tsx, components/projects/star-map.module.css, and styles/tokens.css.
+- Diff check passed. Build and lint require dependencies, and npm ci hit a permissions error in node_modules. Next is a browser check after dependency installation.
+
+### S8 project labels — 2026-11-22
+
+- Positioned all labels below their dots and kept titles on one line in ProjectStarMap.tsx, star-map.module.css, and tokens.css.
+- Local review pending. The npm registry timed out and the offline cache could not complete installation.
+
+### S8 project dot motion — 2026-11-22
+
+- Increased radial travel and switched to a quicker linear back-and-forth in star-map.module.css and tokens.css.
+- Lint reported seven warnings and zero errors. Build hit a permissions error writing .next. The hydration warning needs the console attribute diff to identify its source.
+
+### S8 staggered project motion — 2026-11-22
+
+- Animated every project dot with slower easing and varied radial travel, speed, and phase. Updated ProjectStarMap.tsx, star-map.module.css, and tokens.css.
+- Lint reported seven warnings and zero errors. Build hit a permissions error writing .next.
+
+### S8 randomized project motion — 2026-11-22
+
+- Randomized radial targets around a 9-unit mean travel. Spoke endpoints track dots, turns decelerate smoothly, and the active rim radius increased by one unit.
+- Updated ProjectStarMap.tsx, star-map.module.css, and tokens.css. Production build and lint passed with existing warnings. Browser feel remains for review.
+
+### S8 full project orbits — 2026-11-22
+
+- Fixed flickering caused by the CSS build converting 1900ms to 1.9s before JavaScript read the number. Each dot now settles at a new radius, completes a full lap, and pauses briefly before repeating.
+- Updated ProjectStarMap.tsx, star-map.module.css, and tokens.css. Build and lint passed with existing warnings. Browser review pending.
+
+### S8 radial project cycles — 2026-11-22
+
+- Corrected the motion in ProjectStarMap.tsx and tokens.css. Each of the seven dots travels out along its spoke, returns to its starting point, pauses briefly, and then samples a new distance.
+- Production build, lint, and diff check passed. Browser review pending.
+
+### S7 About cleanup — 2026-11-22
+
+- Removed the Selected work section and project map from app/about/page.tsx. The Projects route retains its map.
+- Build and lint passed with existing warnings. No owner action needed.

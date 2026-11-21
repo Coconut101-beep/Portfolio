@@ -11,6 +11,7 @@
 
 .stage {
   position: relative;
+  container-type: inline-size;
   width: 100%;
   aspect-ratio: 1;
   overflow: hidden;
@@ -37,13 +38,8 @@
   opacity: 0.9;
 }
 
-.orbits {
-  transform-origin: 320px 320px;
-  animation: orbit-spin var(--motion-orbit) linear infinite;
-}
-
 .spoke {
-  stroke: var(--map-spoke);
+  stroke: var(--map-soon);
   stroke-width: 1;
 }
 
@@ -56,11 +52,9 @@
   dominant-baseline: middle;
 }
 
-.glow {
-  fill: var(--map-active-glow);
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: pulse-glow var(--motion-pulse) var(--ease-in-out) infinite;
+.rim {
+  fill: var(--map-active-rim);
+  r: var(--map-active-rim-radius);
 }
 
 .core {
@@ -71,12 +65,13 @@
   fill: var(--map-soon);
 }
 
-.float {
-  animation: star-float var(--motion-pulse) var(--ease-in-out) infinite alternate;
-}
-
 .node {
   position: absolute;
+  left: var(--map-node-x);
+  transform: translate(
+    clamp(calc(-1 * var(--map-node-x)), -50%, calc(100cqw - var(--map-node-x) - 100%)),
+    var(--map-label-offset)
+  );
   z-index: 2;
   display: flex;
   flex-direction: column;
@@ -120,6 +115,7 @@
 }
 
 .nodeLabel {
+  white-space: nowrap;
   font-size: var(--text-map-label);
   line-height: 1.25;
   color: var(--color-ink);
@@ -145,42 +141,4 @@
   color: var(--color-ink-muted);
   font-family: var(--font-map);
   font-size: var(--text-map);
-}
-
-@keyframes orbit-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes pulse-glow {
-  0%,
-  100% {
-    opacity: 0.45;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.22);
-  }
-}
-
-@keyframes star-float {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(-3px);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .orbits,
-  .glow,
-  .float {
-    animation: none;
-  }
 }
