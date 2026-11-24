@@ -165,4 +165,76 @@
   --books-per-shelf: 7;
   --shelf-gap: 28px;
   --book-cover-width: 120px;
+
+  /* Orbital library */
+  --orbit-bg: var(--color-card);
+  --orbit-stage: var(--color-sand);
+  --orbit-panel: var(--color-book-page);
+  --orbit-border: var(--color-border);
+  --orbit-text: var(--color-ink);
+  --orbit-muted: var(--color-ink-muted);
+  --orbit-accent: var(--color-accent);
+  --orbit-selected: color-mix(in srgb, var(--color-sea-glass) 45%, var(--orbit-panel));
+  --orbit-sphere: var(--color-slate-blue);
+  --orbit-paper: var(--color-book-paper);
+  --orbit-cover-ink: var(--color-book-ink);
+  --orbit-cover-paper: var(--color-book-page);
+  --orbit-scrim: rgb(43 42 40 / 37%);
+  --orbit-shadow: 0 16px 40px var(--color-shelf-shadow);
+  --orbit-font-ui: system-ui, sans-serif;
+  --orbit-title: clamp(1.625rem, 3.5vw, 2.25rem);
+  --orbit-label: 0.6875rem;
+  --orbit-sidebar: clamp(11rem, 22vw, 14.25rem);
+  --orbit-stage-height: clamp(23rem, 37vw, 31.25rem);
+  --orbit-stage-compact: clamp(17rem, 82vw, 22rem);
+  --orbit-preview-width: 18.75rem;
+  --orbit-preview-height: 15rem;
+  --orbit-detail-width: 25rem;
+  --orbit-detail-offset: 5.5rem;
+  --orbit-cover-ratio: 2 / 3;
+  --orbit-touch-target: 2.75rem;
+  --orbit-radius: 1.25rem;
+  --orbit-radius-preview: 1rem;
+  --orbit-radius-row: 0.625rem;
+  --orbit-radius-round: 50%;
+  --orbit-indicator-width: 3px;
+  --orbit-depth-fade: 220ms;
+  --orbit-settle: 600ms;
+  --orbit-lap: 120s;
+  --orbit-reflow: 500ms;
+  --orbit-enter: 300ms;
+  --orbit-hover: 180ms;
+  --orbit-panel-open: 320ms;
+  --orbit-panel-close: 220ms;
+  --orbit-cover-width: 6rem;
+  --orbit-chevron: 0.5rem;
+  --orbit-glyph: 0.75rem;
+  --orbit-shadow-width: 53%;
+  --orbit-shadow-offset: 15%;
+  --orbit-fallback-sphere: 51%;
+  --orbit-panel-slide: 1.5rem;
+  --orbit-sheet-height: 85dvh;
+  --orbit-art-title: 39;
+  --orbit-art-title-min: 21;
+  --orbit-art-author: 18;
+}
+
+@container orbital-library (inline-size < 43rem) {
+  [data-orbit-layout] {
+    --orbit-grid: minmax(0, 1fr);
+    --orbit-sidebar-display: none;
+    --orbit-filter-display: inline-flex;
+    --orbit-layout-padding: var(--space-3);
+    --orbit-viewport-height: var(--orbit-stage-compact);
+  }
+}
+
+@media (width < 48rem) {
+  [data-orbit-layout] {
+    --orbit-panel-inset: auto 0 0;
+    --orbit-panel-width: 100%;
+    --orbit-panel-height: var(--orbit-sheet-height);
+    --orbit-panel-radius: var(--orbit-radius) var(--orbit-radius) 0 0;
+    --orbit-panel-from: translateY(var(--orbit-panel-slide));
+  }
 }

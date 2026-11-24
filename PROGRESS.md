@@ -158,3 +158,33 @@ Session log for the Portfolio site. **Append only** — never rewrite earlier en
 
 - Removed the Selected work section and project map from app/about/page.tsx. The Projects route retains its map.
 - Build and lint passed with existing warnings. No owner action needed.
+
+### S2 bookshelf comparison — 2026-11-25
+
+- Appended the 3D library below the current shelf on `/books`. It uses the portfolio palette, native WebGL, genre filters, book previews, and a responsive details panel. Missing artwork uses generated title covers.
+- Files: `app/books/page.tsx`, `components/bookshelf/{OrbitalLibrary.tsx,orbital-library.module.css,orbit-controller.ts,orbit-renderer.ts}`, `data/books.ts`, `styles/tokens.css`, and this log.
+- Build and lint passed with existing warnings. Chrome verified desktop and mobile navigation, filtering, previews and details, reduced motion, and the WebGL fallback. Both designs are ready for the owner to compare.
+
+### S2 independent globe catalog — 2026-11-25
+
+- Copied all 14 original entries into a separate globe list in `data/books.ts`. New globe entries need only a title and author.
+- Updated `data/books.ts`, `app/books/page.tsx`, `components/bookshelf/OrbitalLibrary.tsx`, and this log.
+- Build and lint passed with existing warnings. Verified the separate catalogs and a minimal entry, plus the copied author, note, and quote in Chrome. Future globe content edits go in `orbitalBookEntries`.
+
+### S2 globe motion and catalog cleanup — 2026-11-25
+
+- Added a two-minute clockwise orbit with hover pause and reduced-motion support. Genre selection stays single-select and uses arrays for selections and book genres.
+- Removed sample entries from both catalogs and kept the one real title found in the repository. Globe entries accept title, authors, notes, genres, and a cover image path.
+- Updated `data/books.ts`, `components/bookshelf/{OrbitalLibrary.tsx,orbital-library.module.css,orbit-controller.ts}`, `styles/tokens.css`, and this log. Build, lint, catalog checks, and desktop/mobile Chrome checks passed with existing lint warnings.
+- Next: import any additional real titles once the owner shares the bookshelf database link or export.
+
+### S2 original shelf restoration — 2026-11-25
+
+- Restored the original 14-book catalog exactly. The separate globe catalog keeps the verified title and slow clockwise rotation with hover pause.
+- Enabled multi-select genres on the globe. Books match any selected genre, All Books clears the selection, and the mobile drawer stays open for additional picks.
+- Updated `data/books.ts`, `components/bookshelf/OrbitalLibrary.tsx`, and this log. Build and lint passed with existing warnings. Chrome verified the restored shelf, autoplay and mobile drawer. Filter checks covered overlapping genres, deselection, and clearing with test data.
+
+### S2 full globe catalog — 2026-11-25
+
+- Copied all 14 original bookshelf entries into the globe's independent catalog, including the existing examples. Added an inline entry template in `data/books.ts` for title, authors, notes, cover, and genres.
+- Updated `data/books.ts` and this log. Build and lint passed with existing warnings. Desktop and mobile Chrome verified both catalogs, multi-select, and hover pause. The owner can curate `orbitalBookEntries` directly.

@@ -1,4 +1,5 @@
 import { Bookshelf } from "@/components/bookshelf/Bookshelf";
+import { OrbitalLibrary } from "@/components/bookshelf/OrbitalLibrary";
 import { getBooks, getBookshelfPage } from "@/lib/content";
 
 export const metadata = {
@@ -6,5 +7,10 @@ export const metadata = {
 };
 
 export default function BooksPage() {
-  return <Bookshelf books={getBooks()} copy={getBookshelfPage()} />;
+  return (
+    <>
+      <Bookshelf books={getBooks()} copy={getBookshelfPage()} />
+      <OrbitalLibrary />
+    </>
+  );
 }
